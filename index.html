@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apgruder by Litrerelly</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--taupe:#7d706a;--cream:#efe9e4;--ink:#2f2a28;--glass:rgba(52,44,40,.52);--line:rgba(255,255,255,.22);--win:#9be3b8;--lose:#ff9a9a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:#fff;font:15px/1.45 Jost,"Segoe UI",Arial,sans-serif;padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+button{font:inherit;color:inherit;cursor:pointer}
+.bgs{position:fixed;inset:0;z-index:-2}.bgs svg{width:100%;height:100%;display:block}
+.scrim{position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(20,16,14,.6))}
+nav{margin:18px 22px 0;background:rgba(125,112,106,.93);display:flex;align-items:center;gap:22px;padding:18px 34px;flex-wrap:wrap}
+.brand{font-size:24px;font-weight:500;white-space:nowrap}.brand i{font-style:normal;margin-right:8px}
+.links{flex:1;display:flex;justify-content:center;gap:26px;font-size:18px}.links a{color:#fff;text-decoration:none}.links a:hover{text-decoration:underline}
+.rt{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tag{border:1px solid var(--line);border-radius:99px;padding:8px 16px;font-weight:500;background:rgba(255,255,255,.08)}
+.pill{border:1px solid #fff;background:none;border-radius:99px;padding:12px 30px;font-size:17px;color:#fff}.pill:hover{background:rgba(255,255,255,.15)}
+.btn{border:0;border-radius:99px;padding:11px 22px;background:var(--cream);color:var(--ink);font-weight:600}
+.btn.d{background:var(--taupe);color:#fff}.btn.o{background:none;border:1px solid #b9b0aa;color:var(--ink)}
+.hero{min-height:calc(100vh - 150px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+.hero h1{font:500 clamp(54px,9vw,120px)/1 "Cormorant Garamond",Georgia,serif;margin:0;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero p{font-size:22px;margin:16px 0 34px;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+.cta{border:0;background:var(--cream);color:var(--ink);border-radius:99px;padding:17px 38px;font-size:20px;text-decoration:none}
+.sec{max-width:1120px;margin:0 auto;padding:30px 20px}
+.sec h2{font:500 42px "Cormorant Garamond",Georgia,serif;margin:0 0 20px;text-align:center}
+.glass{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:22px}
+.arena{display:grid;grid-template-columns:1fr 300px 1fr;gap:18px;align-items:center}
+.box{padding:22px;display:flex;flex-direction:column;gap:12px;min-height:280px;justify-content:center}
+.box h3{margin:0;font-weight:500;color:#e2d9d2}
+.big{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.1);border-radius:16px;padding:14px 18px;font:500 28px Jost,sans-serif;color:#fff;outline:0}.big:focus{border-color:#fff}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.1);border-radius:99px;padding:8px 15px;color:#fff;font-weight:500}
+.chip:hover,.chip.on{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.ring{position:relative;width:280px;height:280px;margin:auto}.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.needle{position:absolute;inset:0;transition:transform 3s cubic-bezier(.12,.7,.1,1)}
+.needle::after{content:"";position:absolute;left:50%;top:-8px;margin-left:-11px;border:11px solid transparent;border-top:19px solid var(--cream);filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.mid b{font:500 50px "Cormorant Garamond",Georgia,serif}.mid span{color:#e2d9d2}
+.bar{display:grid;grid-template-columns:1fr 300px 1fr;gap:18px;margin-top:18px;align-items:center}
+.cell{padding:14px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+input[type=range]{flex:1;min-width:110px;accent-color:var(--cream)}
+.go{border:0;border-radius:99px;background:var(--cream);color:var(--ink);font-size:19px;font-weight:600;padding:17px;letter-spacing:.5px}.go:disabled{opacity:.55;cursor:wait}
+.cust{width:96px;border:1px solid var(--line);border-radius:99px;padding:8px 12px;background:rgba(255,255,255,.1);color:#fff;font-weight:500}
+.cust::placeholder{color:#cfc5be}
+#feed{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px}
+.drop{flex:none;min-width:150px;background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:10px 14px;border-bottom:3px solid var(--win)}
+.drop.l{border-bottom-color:var(--lose)}.drop small{display:block;color:#d8cec7;font-size:12px}.drop b{font-size:18px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.st{padding:16px}.st small{color:#d8cec7}.st b{display:block;font:500 30px "Cormorant Garamond",Georgia,serif}
+.g{color:var(--win)}.rd{color:var(--lose)}
+.note{text-align:center;color:#e2d9d2;font-size:13px;margin:22px 0 0}
+.rb{position:fixed;left:0;right:0;bottom:0;display:grid;place-items:center;font-weight:600;letter-spacing:3px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);background:linear-gradient(90deg,#ff3b3b,#ff9f1a,#ffe14d,#3ddc84,#2bb8ff,#7a5cff,#ff4fd8,#ff3b3b);background-size:300% 100%;animation:fl 5s linear infinite;height:calc(38px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px)}
+@keyframes fl{to{background-position:300% 0}}
+.md{position:fixed;inset:0;background:rgba(25,20,18,.65);display:none;place-items:center;z-index:9;padding:16px}.md.on{display:grid}
+.mb{background:var(--cream);color:var(--ink);border-radius:22px;padding:24px;width:100%;max-width:420px;max-height:88vh;overflow:auto}
+.mb h2{margin:0 0 12px;font:500 32px "Cormorant Garamond",serif}.mb input.f{width:100%;margin:6px 0;padding:13px 16px;border:1px solid #cfc5be;border-radius:99px;font-size:15px;background:#fff}
+.mb .cust{background:#fff;color:var(--ink);border-color:#cfc5be}
+.tabs{display:flex;gap:8px;margin-bottom:12px}.err{color:#b3373f;min-height:20px;font-size:13px}
+table{width:100%;border-collapse:collapse}td{padding:6px 4px;border-bottom:1px solid #d9d1cb;font-size:13px}td input{width:110px;padding:6px 10px;border:1px solid #cfc5be;border-radius:99px}
+@media(max-width:960px){.arena,.bar{grid-template-columns:1fr}.links{display:none}.stats{grid-template-columns:1fr 1fr}nav{padding:14px 18px}}
+@media(prefers-reduced-motion:reduce){.rb{animation:none}.needle{transition-duration:.3s}html{scroll-behavior:auto}}
+.mb{color-scheme:light}
+.mb input.f,.mb .cust,.mb td input{color:#000!important;background:#fff!important;caret-color:#000}
+.mb input::placeholder{color:#8a8078}
+.tw{max-height:210px;overflow:auto;border:1px solid #d9d1cb;border-radius:14px;margin:8px 0}
+tr[data-e]{cursor:pointer}tr[data-e]:hover td{background:#e9e1db}tr.sel td{background:#d9cec6;font-weight:600}
+.spx{margin-top:10px}.r{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.resx{font-style:normal;font-weight:600;margin-top:6px;min-height:22px;font-size:16px}
+.mb .g{color:#1f7a4a}.mb .rd{color:#b3373f}
+</style>
+</head>
+<body id="top">
+<div class="bgs"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>
+<linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d92a8"/><stop offset=".38" stop-color="#d8bd92"/><stop offset=".55" stop-color="#f4dba6"/></linearGradient>
+<radialGradient id="sun" cx=".66" cy=".33" r=".45"><stop offset="0" stop-color="#fff3c9" stop-opacity=".95"/><stop offset="1" stop-color="#fff3c9" stop-opacity="0"/></radialGradient>
+<linearGradient id="ms" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#sk)"/><rect width="1600" height="900" fill="url(#sun)"/>
+<path d="M0 420L150 360 300 400 480 330 650 400 820 350 1000 410 1200 340 1400 400 1600 360V900H0Z" fill="#a3adb5"/>
+<path d="M0 520L200 450 380 500 560 430 760 510 980 440 1180 520 1400 450 1600 500V900H0Z" fill="#7d8b90"/>
+<rect y="470" width="1600" height="130" fill="url(#ms)"/>
+<path d="M0 640L220 570 420 630 640 560 900 650 1160 580 1420 660 1600 610V900H0Z" fill="#4d5e58"/>
+<rect y="610" width="1600" height="110" fill="url(#ms)"/>
+<path d="M0 770L300 710 620 785 980 725 1300 795 1600 745V900H0Z" fill="#2a3630"/>
+<g fill="#1c2621"><path d="M60 720L110 540 160 720Z"/><path d="M140 740L200 500 260 740Z"/><path d="M250 730L295 590 340 730Z"/><path d="M1380 740L1440 560 1500 740Z"/><path d="M1470 750L1530 520 1590 750Z"/></g></svg></div>
+<div class="scrim"></div>
+<nav>
+  <div class="brand"><i>&#10059;</i>Apgruder</div>
+  <div class="links"><a href="#top">Главная</a><a href="#game">Игра</a><a href="#stats">Статистика</a></div>
+  <div class="rt"><span class="tag" id="rtpP"></span><span class="tag" id="bal">—</span><button class="btn d" id="admB" style="display:none">Админ</button><button class="pill" id="accB">Войти</button></div>
+</nav>
+<section class="hero">
+  <h1>Level Up Your Luck</h1>
+  <p>Апгрейд игрового баланса · by Litrerelly</p>
+  <a class="cta" href="#game">Играть</a>
+</section>
+<section class="sec" id="game">
+  <h2>Апгрейд</h2>
+  <div class="arena">
+    <div class="box glass"><h3>Ваша ставка</h3><input class="big" id="bet" inputmode="numeric" autocomplete="off">
+      <div><button class="chip" data-p="10">10%</button> <button class="chip" data-p="25">25%</button> <button class="chip" data-p="50">50%</button> <button class="chip" data-p="100">MAX</button></div></div>
+    <div class="ring"><svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="92" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="14"/><circle id="arc" cx="110" cy="110" r="92" fill="none" stroke="#efe9e4" stroke-width="14" stroke-linecap="round" style="transition:stroke-dasharray .25s"/></svg>
+      <div class="needle" id="needle"></div><div class="mid"><b id="ch"></b><span id="mx"></span><i id="res" class="resx"></i></div></div>
+    <div class="box glass"><h3>Возможный выигрыш</h3><input class="big" id="win" inputmode="numeric" autocomplete="off">
+      <div id="mults"><button class="chip" data-m="1.5">x1.5</button> <button class="chip" data-m="2">x2</button> <button class="chip" data-m="5">x5</button> <button class="chip" data-m="10">x10</button></div></div>
+  </div>
+  <div class="bar">
+    <div class="cell glass"><span>Ставка</span><input type="range" id="bs" min="0" max="100" value="10"></div>
+    <button class="go" id="go">АПГРЕЙД</button>
+    <div class="cell glass"><button class="chip" data-c="35">35%</button><button class="chip" data-c="50">50%</button><button class="chip" data-c="70">70%</button><input class="cust" id="cu" type="number" min="1" max="90" step="0.1" placeholder="свой %" aria-label="Свой шанс в процентах"></div>
+  </div>
+</section>
+<section class="sec" id="stats">
+  <h2>Лайв дроп</h2><div id="feed"></div>
+  <h2 style="margin-top:26px">Статистика</h2>
+  <div class="stats"><div class="st glass"><small>Апгрейдов</small><b id="s1">0</b></div><div class="st glass"><small>Винрейт</small><b id="s2">0%</b></div><div class="st glass"><small>Побед</small><b class="g" id="s3">0</b></div><div class="st glass"><small>Поражений</small><b class="rd" id="s4">0</b></div><div class="st glass"><small>Профит</small><b id="s5">0</b></div></div>
+  <p class="note">Игровой симулятор на очках без денежной стоимости: вывода нет. Выплата = RTP ÷ шанс, шанс честный.</p>
+</section>
+<div class="rb">OWNER BY LITERRELLY</div>
+<div class="md" id="auth"><div class="mb"><div class="tabs"><button class="btn d" id="tL">Вход</button><button class="btn o" id="tR">Регистрация</button></div>
+  <input class="f" id="em" type="text" placeholder="Почта или ник" autocomplete="username"><input class="f" id="pw" type="password" placeholder="Пароль (от 6 символов)" autocomplete="current-password">
+  <div class="err" id="er"></div><button class="btn d" id="ok" style="width:100%">Войти</button></div></div>
+<div class="md" id="adm"><div class="mb" style="max-width:560px"><h2>Админ-панель</h2>
+  <div style="margin-bottom:12px">RTP, %: <input class="cust" id="rtpI" type="number" min="50" max="100" step="0.5"> <button class="btn d" id="rtpS">Применить</button></div>
+  <input class="f" id="sq" placeholder="Поиск игрока по почте или нику">
+  <div class="tw"><table id="ut"></table></div>
+  <div id="sp" style="display:none" class="spx"><div><b id="sn"></b> · баланс <b id="sb"></b></div>
+    <input class="f" id="amt" inputmode="numeric" placeholder="Сумма" autocomplete="off">
+    <div class="r"><button class="btn d" id="aAdd">+ Добавить</button><button class="btn d" id="aSub">− Списать</button><button class="btn o" id="aSet">Установить</button></div>
+    <div class="r"><button class="btn o" data-q="10000">+10k</button><button class="btn o" data-q="100000">+100k</button><button class="btn o" data-q="1000000">+1M</button><button class="btn o" data-q="10000000">+10M</button></div>
+    <input class="f" id="np" type="text" placeholder="Новый пароль для игрока" autocomplete="off"><button class="btn o" id="npB">Сбросить пароль</button><div class="err" id="ae"></div></div><button class="btn o" id="admX" style="margin-top:14px">Закрыть</button></div></div>
+
+<script>
+const $=i=>document.getElementById(i),F=n=>Math.round(n).toLocaleString('ru-RU').replace(/\u00a0/g,' ');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),num=v=>parseInt(String(v).replace(/\D/g,''))||0;
+let tok='',me=null,rtp=95,mode='L',feed=[],sel=null,q='';
+try{tok=localStorage.getItem('apg_t')||''}catch(e){}
+let st={bet:1000,ch:50,n:0,w:0,l:0,pr:0,rot:0,busy:false};
+async function api(p,b){let r;try{r=await fetch('/api/'+p,{method:b?'POST':'GET',headers:{'Content-Type':'application/json',Authorization:'Bearer '+tok},body:b?JSON.stringify(b):undefined})}catch(e){throw new Error('Нет связи с сервером')}
+  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Ошибка сервера');return d}
+const mult=()=>rtp/st.ch;
+function renderFeed(){$('feed').innerHTML=feed.map(f=>`<div class="drop ${f.w?'':'l'}"><small>${esc(f.e)}</small><b>${f.w?'+':'−'}${F(f.a)} ₽</b><small>x${(+f.m).toFixed(2)} · ${(+f.c).toFixed(1)}%</small></div>`).join('')||'<small>Пока пусто</small>'}
+function render(){
+  $('bal').textContent=me?F(me.bal)+' ₽':'—';$('accB').textContent=me?'Выйти':'Войти';$('admB').style.display=me&&me.admin?'':'none';$('rtpP').textContent='RTP '+rtp+'%';
+  if(me)st.bet=clamp(st.bet,0,me.bal);
+  const m=mult(),C=2*Math.PI*92;
+  if(document.activeElement!==$('bet'))$('bet').value=F(st.bet);
+  if(document.activeElement!==$('win'))$('win').value=F(st.bet*m);
+  $('bs').value=me&&me.bal?st.bet/me.bal*100:0;
+  $('arc').setAttribute('stroke-dasharray',(C*st.ch/100)+' '+C);
+  $('ch').textContent=st.ch.toFixed(2)+'%';$('mx').textContent='x'+m.toFixed(2);
+  document.querySelectorAll('[data-c]').forEach(b=>b.classList.toggle('on',+b.dataset.c===st.ch));
+  $('s1').textContent=st.n;$('s2').textContent=(st.n?(st.w/st.n*100).toFixed(1):0)+'%';$('s3').textContent=st.w;$('s4').textContent=st.l;
+  const p=$('s5');p.textContent=(st.pr>0?'+':'')+F(st.pr);p.className=st.pr>0?'g':st.pr<0?'rd':'';
+  $('go').disabled=st.busy||!me||st.bet<10;$('go').textContent=!me?'ВОЙДИТЕ, ЧТОБЫ ИГРАТЬ':st.busy?'КРУТИМ…':'АПГРЕЙД';renderFeed();
+}
+async function loadFeed(){if(st.busy)return;try{feed=(await api('feed')).feed;renderFeed()}catch(e){}}
+async function refreshMe(){const d=await api('me');me=d.user;rtp=d.rtp;render()}
+function setMode(m){mode=m;$('tL').className='btn '+(m=='L'?'d':'o');$('tR').className='btn '+(m=='R'?'d':'o');$('ok').textContent=m=='L'?'Войти':'Создать аккаунт';$('er').textContent='';}
+$('tL').onclick=()=>setMode('L');$('tR').onclick=()=>setMode('R');
+$('accB').onclick=()=>{if(me){me=null;tok='';try{localStorage.removeItem('apg_t')}catch(e){}Object.assign(st,{n:0,w:0,l:0,pr:0});render();$('auth').classList.add('on')}else $('auth').classList.add('on')};
+$('ok').onclick=async()=>{const id=$('em').value.trim(),p=$('pw').value;if(!id)return $('er').textContent='Введите почту или ник';
+  try{const d=mode=='R'?await api('register',{email:id,password:p}):await api('login',{id,password:p});tok=d.token;try{localStorage.setItem('apg_t',tok)}catch(e){}
+    me=d.user;$('auth').classList.remove('on');$('pw').value='';await refreshMe()}catch(e){$('er').textContent=e.message}};
+async function admin(){$('rtpI').value=rtp;
+  try{const d=await api('admin/users?q='+encodeURIComponent(q));
+    $('ut').innerHTML=d.users.map(u=>`<tr data-e="${esc(u.name)}" data-b="${u.bal}" class="${u.name===sel?'sel':''}"><td>${esc(u.name)}${u.admin?' ★':''}</td><td style="text-align:right">${F(u.bal)} ₽</td></tr>`).join('')||'<tr><td>Никого не найдено</td></tr>';
+    $('ut').querySelectorAll('tr[data-e]').forEach(r=>r.onclick=()=>{sel=r.dataset.e;admin()});
+    const row=sel&&$('ut').querySelector(`tr[data-e="${CSS.escape(sel)}"]`);$('sp').style.display=row?'block':'none';
+    if(row){$('sn').textContent=sel;$('sb').textContent=F(+row.dataset.b)+' ₽'}$('ae').textContent='';
+  }catch(e){$('ae').textContent=e.message}
+  $('adm').classList.add('on')}
+async function adj(m,a){if(!sel)return;try{await api('admin/balance',{id:sel,mode:m,amount:a});await admin();if(me&&sel===me.name)await refreshMe()}catch(e){$('ae').textContent=e.message}}
+$('admB').onclick=admin;$('admX').onclick=()=>$('adm').classList.remove('on');
+$('sq').oninput=e=>{q=e.target.value.trim().toLowerCase();admin()};
+$('aAdd').onclick=()=>adj('add',num($('amt').value));$('aSub').onclick=()=>adj('sub',num($('amt').value));$('aSet').onclick=()=>adj('set',num($('amt').value));
+document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>adj('add',+b.dataset.q));
+$('npB').onclick=async()=>{try{await api('admin/password',{id:sel,password:$('np').value});$('np').value='';$('ae').textContent='Пароль изменён'}catch(e){$('ae').textContent=e.message}};
+$('rtpS').onclick=async()=>{try{const d=await api('admin/rtp',{rtp:parseFloat($('rtpI').value)});rtp=d.rtp;render()}catch(e){$('ae').textContent=e.message}};
+$('bet').oninput=e=>{st.bet=num(e.target.value);render()};$('bet').onblur=render;
+$('win').oninput=e=>{const w=num(e.target.value);if(st.bet>0&&w>st.bet)st.ch=clamp(Math.round(rtp*st.bet/w*100)/100,1,90);render()};$('win').onblur=render;
+$('bs').oninput=e=>{if(me)st.bet=Math.round(me.bal*e.target.value/100);render()};
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{if(me)st.bet=Math.round(me.bal*b.dataset.p/100);render()});
+document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{st.ch=+b.dataset.c;$('cu').value='';render()});
+document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{st.ch=clamp(Math.round(rtp/+b.dataset.m*100)/100,1,90);render()});
+$('cu').oninput=e=>{const v=parseFloat(e.target.value);if(v)st.ch=clamp(v,1,90);render()};
+$('go').onclick=async()=>{if(!me||st.busy||st.bet<10||st.bet>me.bal)return;
+  st.busy=true;$('res').textContent='';const bet=st.bet,ch=st.ch;render();
+  try{const d=await api('spin',{bet,chance:ch});me.bal-=bet;render();
+    st.rot=Math.ceil(st.rot/360)*360+1800+d.angle;$('needle').style.transform=`rotate(${st.rot}deg)`;
+    setTimeout(()=>{me.bal=d.bal;st.n++;d.win?st.w++:st.l++;st.pr+=d.pay-bet;st.busy=false;render();
+      const rs=$('res');rs.textContent=d.win?'Победа +'+F(d.pay-bet)+' ₽':'Проигрыш −'+F(bet)+' ₽';rs.className='resx '+(d.win?'g':'rd');loadFeed()},3100);
+  }catch(e){st.busy=false;$('res').textContent=e.message;render();if(/войти/i.test(e.message)){me=null;render();$('auth').classList.add('on')}}};
+(async()=>{try{rtp=(await api('config')).rtp}catch(e){}
+  if(tok){try{await refreshMe()}catch(e){tok=''}}
+  render();if(!me)$('auth').classList.add('on');loadFeed();setInterval(loadFeed,4000)})();
+</script>
+</body>
+</html>
