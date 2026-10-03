@@ -4,178 +4,348 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Apgruder by Litrerelly</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23ffd54f' stroke='%23b8860b' stroke-width='2'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' font-family='Georgia' fill='%237a5200'%3EA%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
-:root{--bg1:#0d0a1a;--bg2:#1a1333;--card:rgba(38,28,64,.72);--card2:rgba(30,22,52,.9);--line:rgba(255,255,255,.1);
---txt:#f2eefc;--mut:#a89bd6;--green:#2fce72;--red:#ff5468;--yellow:#ffd166;--accent:#8b5cf6;--accent2:#ff5ec7;
+:root{--bg1:#090d16;--bg2:#0f1626;--card:rgba(20,27,46,.78);--card2:rgba(15,21,38,.92);--line:rgba(255,255,255,.08);
+--txt:#eef1fb;--mut:#8b93ad;--gold:#ffcf6b;--gold2:#f2a93c;--em:#20c997;--red:#ff5a6e;--green:#2fce72;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);color-scheme:dark}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg1);color:var(--txt);font:15px/1.45 Jost,"Segoe UI",Arial,sans-serif;padding-bottom:calc(44px + env(safe-area-inset-bottom,0px))}
+body{margin:0;background:var(--bg1);color:var(--txt);font:15px/1.45 Jost,"Segoe UI",Arial,sans-serif;padding-bottom:24px}
 button{font:inherit;color:inherit;cursor:pointer}
 .bgs{position:fixed;inset:0;z-index:-2}.bgs svg{width:100%;height:100%;display:block}
-.scrim{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% -10%,rgba(139,92,246,.18),transparent 60%)}
-nav{position:sticky;top:0;z-index:20;padding:10px 16px;gap:10px;display:flex;align-items:center;background:rgba(20,14,38,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.brand{font-size:20px;font-weight:600;white-space:nowrap;background:linear-gradient(90deg,#fff,#c9b6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.scrim{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% -10%,rgba(255,207,107,.08),transparent 55%)}
+nav{position:sticky;top:0;z-index:20;padding:10px 16px;gap:8px;display:flex;align-items:center;background:rgba(9,13,22,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{font:700 20px Sora,sans-serif;white-space:nowrap;background:linear-gradient(90deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 .brand i{font-style:normal;margin-right:6px}
-.links{flex:1;display:flex;justify-content:center;gap:22px;font-size:16px}.links a{color:var(--txt);text-decoration:none;opacity:.85}.links a:hover{opacity:1}
-.rt{display:flex;align-items:center;gap:8px;margin-left:auto}
-.tag{border:1px solid var(--line);border-radius:99px;padding:6px 12px;background:rgba(255,255,255,.06);font-weight:500}
-.bw{position:relative}#bal{font-size:16px;font-weight:700;background:rgba(139,92,246,.22);border-color:rgba(139,92,246,.5)}
+.links{flex:1;display:flex;justify-content:center;gap:18px;font-size:14px}.links a{color:var(--txt);text-decoration:none;opacity:.8}.links a:hover{opacity:1}
+.rt{display:flex;align-items:center;gap:7px;margin-left:auto}
+.tag{border:1px solid var(--line);border-radius:8px;padding:7px 11px;background:rgba(255,255,255,.05);font-weight:600;font-size:13px}
+.bw{position:relative}#bal{font-weight:700;background:rgba(255,207,107,.14);border-color:rgba(255,207,107,.4);color:var(--gold)}
 #bal.fu{animation:fu .8s}#bal.fd{animation:fd .8s}
-@keyframes fu{30%{transform:scale(1.15);background:var(--green)}}
-@keyframes fd{30%{transform:scale(1.15);background:var(--red)}}
+@keyframes fu{30%{transform:scale(1.15);background:var(--green);color:#04150c}}
+@keyframes fd{30%{transform:scale(1.15);background:var(--red);color:#210307}}
 .bd{position:absolute;right:0;top:100%;font-weight:700;font-size:13px;opacity:0;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,.7)}
 .bd.on{animation:bdf 1.5s}@keyframes bdf{0%{opacity:0;transform:translateY(-4px)}20%{opacity:1}100%{opacity:0;transform:translateY(16px)}}
-.btn{border:0;border-radius:99px;padding:9px 15px;background:var(--card2);color:#fff;font-weight:600;border:1px solid var(--line)}
-.btn.d{background:linear-gradient(90deg,var(--accent),var(--accent2));border:0}.btn.g{background:linear-gradient(90deg,#1fae59,#2fce72);border:0}
+.btn{border:1px solid var(--line);border-radius:8px;padding:8px 13px;background:var(--card2);color:#fff;font-weight:600;font-size:13px}
+.btn.d{background:linear-gradient(90deg,var(--gold2),var(--gold));border:0;color:#251500;box-shadow:0 4px 14px rgba(255,207,107,.3)}
+.btn.g{background:linear-gradient(90deg,#189656,var(--green));border:0;color:#06180d;box-shadow:0 4px 14px rgba(47,206,114,.3)}
 .btn.o{background:none}
-.hero{padding:26px 16px 10px;text-align:center}
-.hero h1{font:600 clamp(32px,7vw,56px)/1 "Cormorant Garamond",Georgia,serif;margin:0;background:linear-gradient(90deg,#fff,#d6c6ff 60%,#ff9ee0);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--mut);margin:8px 0 0;font-size:14px}
-.sec{max-width:1120px;margin:0 auto;padding:14px 14px 6px}
-.sec h2{font:600 26px "Cormorant Garamond",Georgia,serif;margin:0 0 10px;color:#fff}
-.glass{background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px}
-.icorow{display:flex;gap:8px;max-width:1120px;margin:0 auto;padding:0 14px}
-.ic{width:34px;height:34px;border-radius:50%;background:var(--card2);border:1px solid var(--line);display:grid;place-items:center;font-size:14px}
-.ic.on{background:var(--accent);border-color:var(--accent)}
-.arena{display:grid;grid-template-columns:1fr 260px 1fr;gap:12px;align-items:stretch}
-.box{padding:14px;display:flex;flex-direction:column;gap:8px;min-height:230px}
-.box h3{margin:0;font-size:13px;color:var(--mut);font-weight:600;display:flex;justify-content:space-between}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:7px;overflow-y:auto;max-height:190px;padding-right:2px}
-.pk{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:6px;text-align:center;font-size:11px;position:relative}
-.pk .em{font-size:22px;display:block}.pk .nm{color:var(--mut);display:block;margin:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pk .pr{font-weight:700;font-size:11px}
-.pk.sel{border-color:var(--green);box-shadow:0 0 0 2px rgba(47,206,114,.35) inset;background:rgba(47,206,114,.15)}
-.pk.tg{border-color:var(--accent2)}.pk.tgsel{border-color:var(--accent2);box-shadow:0 0 0 2px rgba(255,94,199,.4) inset;background:rgba(255,94,199,.15)}
-.empty{color:var(--mut);font-size:12px;text-align:center;padding:14px 4px}
+.rolebadge{font-size:10px;padding:2px 6px;border-radius:5px;font-weight:700;margin-left:6px;vertical-align:1px}
+.rb-senior{background:#ffcf6b;color:#3a2500}.rb-admin{background:#ff8fb1;color:#3a0016}.rb-helper{background:#8fd3ff;color:#00243a}.rb-creator{background:#c9a3ff;color:#22003a}
+.avwrap{position:relative}
+.av{width:34px;height:34px;border-radius:8px;object-fit:cover;border:2px solid var(--gold);cursor:pointer;display:block;background:var(--card2)}
+.avph{width:34px;height:34px;border-radius:8px;border:2px solid var(--gold);cursor:pointer;display:grid;place-items:center;font-weight:700;background:linear-gradient(135deg,#2b2350,#1a1330);color:var(--gold)}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:14px;max-width:1320px;margin:0 auto;padding:14px}
+aside{display:flex;flex-direction:column;gap:8px}
+aside h4{margin:2px 0 4px;font-size:11px;color:var(--mut);letter-spacing:1px;text-transform:uppercase}
+.topdrop{background:linear-gradient(135deg,rgba(255,207,107,.16),rgba(255,207,107,.03));border:1px solid rgba(255,207,107,.35);border-radius:12px;padding:10px;text-align:center}
+.topdrop .ic2{width:52px;height:52px;margin:0 auto 6px}
+.dropcard{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:8px;padding:7px 9px;font-size:11px;margin-bottom:6px}
+.dropcard.l{border-left-color:var(--red)}.dropcard small{color:var(--mut);display:block}.dropcard b{font-size:13px}
+.content{min-width:0}
+.hero{padding:6px 0 8px;text-align:center}
+.hero h1{font:700 clamp(26px,5vw,42px)/1 Sora,sans-serif;margin:0;background:linear-gradient(90deg,#fff,var(--gold) 60%,var(--em));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);margin:6px 0 0;font-size:13px}
+.sec{padding:12px 0 6px}
+.sec h2{font:600 22px Sora,sans-serif;margin:0 0 10px;color:#fff;display:flex;align-items:center;justify-content:space-between}
+.sec h2 small{font-size:12px;color:var(--mut);font-weight:500}
+.glass{background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px}
+.icorow{display:flex;gap:8px;padding:0 0 4px}
+.ic{width:30px;height:30px;border-radius:8px;background:var(--card2);border:1px solid var(--line);display:grid;place-items:center;font-size:12px}
+.ic.on{background:var(--gold);color:#251500}
+.arena{display:grid;grid-template-columns:1fr 230px 1fr;gap:12px;align-items:stretch}
+.box{padding:14px;display:flex;flex-direction:column;gap:8px;min-height:210px}
+.box h3{margin:0;font-size:13px;color:var(--mut);font-weight:600}
+.chosen{display:flex;flex-wrap:wrap;gap:6px;flex:1;align-content:flex-start}
+.cchip{background:var(--card2);border:1px solid var(--green);border-radius:8px;padding:5px 8px;font-size:11px;display:flex;align-items:center;gap:5px}
+.cchip button{background:none;border:0;color:var(--red);font-weight:700;padding:0 2px}
+.placeholder{color:var(--mut);font-size:12px;text-align:center;padding:20px 6px}
 .total{display:flex;justify-content:space-between;font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:8px}
-.total b{color:#fff;font-size:15px}
-.ring{position:relative;width:220px;height:220px;margin:2px auto}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.needle{position:absolute;inset:0;transition:transform 3s cubic-bezier(.12,.7,.1,1)}
-.needle::after{content:"";position:absolute;left:50%;top:-6px;margin-left:-9px;border:9px solid transparent;border-top:16px solid #fff;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
-.mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.mid b{font:700 32px Jost,sans-serif}.mid span{color:var(--mut);font-size:11px}
-.go{width:100%;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:700;letter-spacing:.5px;background:linear-gradient(90deg,#1fae59,#2fce72);color:#fff;box-shadow:0 6px 20px rgba(47,206,114,.3)}
+.total b{color:var(--gold);font-size:15px}
+.tgprev{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
+.tgprev .ic2{width:56px;height:56px}
+.tgprev img{width:56px;height:56px;object-fit:contain}
+.tgprev b{font-size:14px}.tgprev span{color:var(--gold);font-weight:700}
+.gauge{position:relative;width:206px;height:206px;margin:0 auto;border-radius:50%;
+ background:conic-gradient(from 180deg,var(--green) 0deg,#ffe066 90deg,var(--gold2) 135deg,var(--red) 180deg,var(--gold2) 225deg,#ffe066 270deg,var(--green) 360deg);
+ box-shadow:0 0 28px rgba(255,207,107,.15)}
+.gauge::before{content:"";position:absolute;inset:13px;border-radius:50%;background:var(--bg2);box-shadow:inset 0 0 18px rgba(0,0,0,.6)}
+.gl{position:absolute;font-size:10px;color:var(--mut);font-weight:600}
+.gl.t{top:-2px;left:50%;transform:translateX(-50%)}.gl.b{bottom:-2px;left:50%;transform:translateX(-50%)}
+.gl.l{left:-4px;top:50%;transform:translateY(-50%)}.gl.r{right:-4px;top:50%;transform:translateY(-50%)}
+.needle{position:absolute;inset:0;transition:transform 3s cubic-bezier(.12,.7,.1,1);pointer-events:none}
+.needle::after{content:"";position:absolute;left:50%;top:0px;margin-left:-8px;border:8px solid transparent;border-top:15px solid #fff;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
+.mid{position:absolute;inset:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%}
+.mid b{font:700 30px Jost,sans-serif}.mid span{color:var(--mut);font-size:11px}
+.go{width:100%;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:700;letter-spacing:.5px;background:linear-gradient(90deg,#189656,var(--green));color:#06180d;box-shadow:0 6px 20px rgba(47,206,114,.3)}
 .go:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
-.rowc{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.chip{border:1px solid var(--line);background:var(--card2);border-radius:99px;padding:6px 12px;font-weight:600;font-size:12px}
-.chip.on{background:var(--accent);border-color:var(--accent)}
-.cust{width:90px;border:1px solid var(--line);border-radius:99px;padding:7px 12px;background:var(--card2);color:#fff;font-weight:500}
-.cust::placeholder{color:#8b7fb0}
-.f{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card2);color:#fff}
-.f::placeholder{color:#8b7fb0}
-#feed{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
-.drop{flex:none;min-width:140px;padding:8px 12px;border-bottom:3px solid var(--green)}
-.drop.l{border-bottom-color:var(--red)}.drop small{display:block;color:var(--mut);font-size:11px}.drop b{font-size:15px}
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.st{padding:10px 12px}.st small{color:var(--mut)}.st b{display:block;font:600 22px "Cormorant Garamond",Georgia,serif}
+.rowc{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center}
+.chip{border:1px solid var(--line);background:var(--card2);border-radius:8px;padding:6px 11px;font-weight:600;font-size:12px}
+.chip.on{background:var(--gold);color:#251500;border-color:var(--gold)}
+.cust{width:84px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--card2);color:#fff;font-weight:500}
+.cust::placeholder{color:#5c6480}
+.f{width:100%;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:var(--card2);color:#fff}
+.f::placeholder{color:#5c6480}
+.cashrow{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.cashrow input[type=range]{flex:1;accent-color:var(--gold)}
+.pickbar{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;max-height:260px;overflow-y:auto;padding:2px}
+.pk{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:7px;text-align:center;font-size:11px;position:relative}
+.pk .ic2{width:36px;height:36px;margin:0 auto 3px}.pk img{width:36px;height:36px;object-fit:contain;margin:0 auto 3px;display:block}
+.pk .nm{color:var(--mut);display:block;margin:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pk .pr{font-weight:700;font-size:11px;color:var(--gold)}
+.pk.sel{border-color:var(--green);box-shadow:0 0 0 2px rgba(47,206,114,.35) inset;background:rgba(47,206,114,.13)}
+.pk.tgsel{border-color:var(--em);box-shadow:0 0 0 2px rgba(32,201,151,.4) inset;background:rgba(32,201,151,.13)}
+.pk .sellb{position:absolute;top:3px;right:3px;background:rgba(255,90,110,.85);color:#fff;border-radius:5px;font-size:9px;padding:2px 4px;border:0}
+.empty{color:var(--mut);font-size:12px;text-align:center;padding:14px 4px}
+#feed{display:flex;flex-direction:column;gap:6px;max-height:420px;overflow-y:auto}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.st{padding:10px 12px}.st small{color:var(--mut)}.st b{display:block;font:700 22px Sora,sans-serif}
 .g{color:var(--green)}.rd{color:var(--red)}
-.note{text-align:center;color:var(--mut);font-size:12px;margin:14px 0 4px}
-.rb{position:fixed;left:0;right:0;bottom:0;display:grid;place-items:center;font-weight:600;letter-spacing:2px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);background:linear-gradient(90deg,#ff3b3b,#ff9f1a,#ffe14d,#3ddc84,#2bb8ff,#7a5cff,#ff4fd8,#ff3b3b);background-size:300% 100%;animation:fl 5s linear infinite;height:calc(28px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);font-size:12px;z-index:15}
-@keyframes fl{to{background-position:300% 0}}
-.md{position:fixed;inset:0;background:rgba(6,4,14,.7);display:none;place-items:center;z-index:30;padding:16px}.md.on{display:grid}
-.mb{color-scheme:light;background:#f4f1fb;color:#1c1730;border-radius:20px;padding:22px;width:100%;max-width:440px;max-height:88vh;overflow:auto}
-.mb h2{margin:0 0 12px;font:600 26px "Cormorant Garamond",serif}
-.mb input.f{background:#fff;color:#000;border:1px solid #d7d0ec}.mb input.f::placeholder{color:#8a8098}
-.mb .cust{background:#fff;color:#000;border-color:#d7d0ec}
-.tabs{display:flex;gap:8px;margin-bottom:12px}.err{color:#b3373f;min-height:20px;font-size:13px}
-table{width:100%;border-collapse:collapse}td{padding:6px 4px;border-bottom:1px solid #e2dcf2;font-size:13px}
-.tw{max-height:210px;overflow:auto;border:1px solid #e2dcf2;border-radius:14px;margin:8px 0}
-tr[data-e]{cursor:pointer}tr[data-e]:hover td{background:#e9e2fa}tr.sel td{background:#dccffb;font-weight:600}
+.note{text-align:center;color:var(--mut);font-size:12px;margin:14px 0}
+.md{position:fixed;inset:0;background:rgba(4,6,12,.72);display:none;place-items:center;z-index:30;padding:16px}.md.on{display:grid}
+.mb{background:#f4f1ec;color:#1a1610;border-radius:16px;padding:22px;width:100%;max-width:440px;max-height:88vh;overflow:auto;color-scheme:light}
+.mb h2{margin:0 0 12px;font:700 24px Sora,sans-serif}
+.mb input.f{background:#fff;color:#000;border:1px solid #ded6c4}.mb input.f::placeholder{color:#8a8070}
+.mb .cust{background:#fff;color:#000;border-color:#ded6c4}
+.tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}.err{color:#b3373f;min-height:20px;font-size:13px}
+.gbox{display:flex;justify-content:center;margin:4px 0 8px}
+.or{text-align:center;color:#8a8070;font-size:12px;margin:6px 0}
+.steambtn{display:block;text-align:center;background:#171a21;color:#66c0f4;text-decoration:none;border-radius:8px;padding:10px;font-weight:700;margin-bottom:8px}
+table{width:100%;border-collapse:collapse}td{padding:6px 4px;border-bottom:1px solid #e2d9c4;font-size:12px}
+.tw{max-height:220px;overflow:auto;border:1px solid #e2d9c4;border-radius:12px;margin:8px 0}
+tr[data-e]{cursor:pointer}tr[data-e]:hover td{background:#ece2c8}tr.sel td{background:#e4d69f;font-weight:600}
 .spx{margin-top:10px}.r{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
 .mb .g{color:#1f7a4a}.mb .rd{color:#b3373f}
-.ad{min-height:170px;border:2px dashed #b9adf0;border-radius:16px;display:grid;place-items:center;color:#7a6fa0;margin:12px 0;text-align:center}
-@media(max-width:960px){.arena{grid-template-columns:1fr}.links{display:none}.stats{grid-template-columns:repeat(3,1fr)}nav{padding:8px 12px}}
-@media(max-width:600px){#rtpP{display:none}.brand i{display:none}}
-@media(prefers-reduced-motion:reduce){.rb{animation:none}.needle{transition-duration:.3s}html{scroll-behavior:auto}}
+.ad{min-height:170px;border:2px dashed #cbb98a;border-radius:14px;display:grid;place-items:center;color:#7a6f55;margin:12px 0;text-align:center;overflow:hidden}
+.coin::after{content:"";display:inline-block;width:13px;height:13px;margin-left:4px;vertical-align:-2px;border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,#fff7d6,#ffd54f 45%,#b8860b 100%);box-shadow:0 0 0 1px rgba(0,0,0,.3) inset}
+.admin-dark{background:linear-gradient(160deg,#0f1626,#141b2e);color:#eef1fb;border:1px solid rgba(255,207,107,.25);box-shadow:0 0 40px rgba(255,207,107,.08);max-width:640px}
+.admin-dark h2{background:linear-gradient(90deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.admin-dark .f,.admin-dark .cust{background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.14)}
+.admin-dark .f::placeholder,.admin-dark .cust::placeholder{color:#7d86a3}
+.admin-dark .tw{border-color:rgba(255,255,255,.14)}
+.admin-dark td{border-color:rgba(255,255,255,.08);color:#dfe4f5}
+.admin-dark tr[data-e]:hover td{background:rgba(255,207,107,.08)}.admin-dark tr.sel td{background:rgba(255,207,107,.16);color:#fff}
+.atab{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:600;color:#c8cfe6}
+.atab.on{background:var(--gold);color:#251500;border-color:var(--gold)}
+.apane{display:none}.apane.on{display:block}
+.astat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.astat div{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 10px}
+.astat small{color:#9aa3c2;display:block;font-size:11px}.astat b{font:700 18px Sora,sans-serif;color:var(--gold)}
+.toastwrap{position:fixed;top:64px;right:14px;z-index:40;display:flex;flex-direction:column;gap:8px}
+.toast{background:linear-gradient(90deg,#189656,var(--green));color:#06180d;padding:10px 16px;border-radius:10px;font-weight:700;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.35);animation:tin .3s,tout .3s 2.4s forwards}
+@keyframes tin{0%{transform:translateX(30px);opacity:0}100%{transform:translateX(0);opacity:1}}
+@keyframes tout{to{transform:translateX(30px);opacity:0}}
+.profile{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.profile img,.profile .avph{width:72px;height:72px;border-radius:16px;font-size:26px}
+.topitem{background:linear-gradient(135deg,#fff7d6,#ffe6a3);border:1px solid #e0c063;border-radius:12px;padding:10px 14px;margin:8px 0;color:#1a1610}
+.invrow{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:1px solid #ece3cf;font-size:13px}
+.invrow button{background:#eadfba;border:0;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:600}
+.fab{position:fixed;right:16px;bottom:16px;z-index:25;border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(90deg,var(--gold2),var(--gold));color:#251500;font-weight:700;box-shadow:0 8px 24px rgba(255,207,107,.35)}
+.chatwrap{display:flex;flex-direction:column;height:60vh;max-height:460px}
+.chatlog{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:6px 2px}
+.msg{max-width:80%;padding:8px 11px;border-radius:10px;font-size:13px}
+.msg.user{align-self:flex-end;background:#e4d69f}.msg.staff{align-self:flex-start;background:#dcefe4}
+.msg small{display:block;color:#7a7362;font-size:10px;margin-top:2px}
+.chatin{display:flex;gap:6px;margin-top:8px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}aside{order:2}.arena{grid-template-columns:1fr}.links{display:none}.stats{grid-template-columns:repeat(3,1fr)}nav{padding:8px 12px}}
+@media(prefers-reduced-motion:reduce){.needle{transition-duration:.3s}html{scroll-behavior:auto}}
 </style>
 </head>
 <body id="top">
 <div class="bgs"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>
-<linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#120b26"/><stop offset=".5" stop-color="#1c1140"/><stop offset="1" stop-color="#0a0716"/></linearGradient>
-<radialGradient id="glowP" cx=".2" cy=".15" r=".5"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".55"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/></radialGradient>
-<radialGradient id="glowR" cx=".85" cy=".2" r=".45"><stop offset="0" stop-color="#ff5ec7" stop-opacity=".4"/><stop offset="1" stop-color="#ff5ec7" stop-opacity="0"/></radialGradient>
-<radialGradient id="glowG" cx=".7" cy=".9" r=".5"><stop offset="0" stop-color="#2fce72" stop-opacity=".28"/><stop offset="1" stop-color="#2fce72" stop-opacity="0"/></radialGradient>
-<pattern id="grd" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity=".05"/></pattern></defs>
+<linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0f1c"/><stop offset=".5" stop-color="#121a30"/><stop offset="1" stop-color="#070a12"/></linearGradient>
+<radialGradient id="glowG" cx=".18" cy=".12" r=".5"><stop offset="0" stop-color="#ffcf6b" stop-opacity=".18"/><stop offset="1" stop-color="#ffcf6b" stop-opacity="0"/></radialGradient>
+<radialGradient id="glowE" cx=".85" cy=".18" r=".45"><stop offset="0" stop-color="#20c997" stop-opacity=".16"/><stop offset="1" stop-color="#20c997" stop-opacity="0"/></radialGradient>
+<pattern id="grd" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity=".04"/></pattern></defs>
 <rect width="1600" height="900" fill="url(#bgg)"/><rect width="1600" height="900" fill="url(#grd)"/>
-<rect width="1600" height="900" fill="url(#glowP)"/><rect width="1600" height="900" fill="url(#glowR)"/><rect width="1600" height="900" fill="url(#glowG)"/>
-<g stroke="#ffffff" stroke-opacity=".06"><path d="M0 700L1600 200"/><path d="M0 820L1600 340"/><path d="M0 560L1600 60"/></g>
-<circle cx="1300" cy="150" r="230" fill="none" stroke="#8b5cf6" stroke-opacity=".18" stroke-width="2"/>
-<circle cx="220" cy="760" r="170" fill="none" stroke="#ff5ec7" stroke-opacity=".16" stroke-width="2"/></svg></div>
+<rect width="1600" height="900" fill="url(#glowG)"/><rect width="1600" height="900" fill="url(#glowE)"/>
+<g stroke="#ffffff" stroke-opacity=".05"><path d="M0 700L1600 200"/><path d="M0 560L1600 60"/></g></svg></div>
 <div class="scrim"></div>
+<div class="toastwrap" id="toasts"></div>
 <nav>
-  <div class="brand"><i>&#10022;</i>Apgruder</div>
+  <div class="brand"><i>&#9670;</i>Apgruder</div>
   <div class="links"><a href="#top">Главная</a><a href="#game">Апгрейд</a><a href="#shop">Магазин</a><a href="#stats">Статистика</a></div>
-  <div class="rt"><span class="tag" id="rtpP"></span><span class="bw"><span class="tag" id="bal">—</span><span id="bd" class="bd"></span></span>
-    <button class="btn" id="topB">Пополнить</button><button class="btn d" id="admB" style="display:none">Админ</button><button class="btn" id="accB">Войти</button></div>
+  <div class="rt">
+    <button class="btn" id="promoB" title="Промокод">🎁</button>
+    <span class="bw"><span class="tag coin" id="bal">—</span><span id="bd" class="bd"></span></span>
+    <button class="btn d" id="topB">Пополнить</button>
+    <button class="btn" id="admB" style="display:none">Консоль</button>
+    <span class="avwrap" id="avWrap" style="display:none"></span>
+    <button class="btn" id="accB">Войти</button>
+  </div>
 </nav>
-<section class="hero"><h1>Level Up Your Luck</h1><p>Апгрейд игровых скинов · by Litrerelly · только виртуальные $</p></section>
-<div class="icorow"><button class="ic" id="icI" title="Как это работает">i</button><button class="ic" id="icF" title="Быстрая анимация">⚡</button><button class="ic" id="icS" title="Звук">🔊</button></div>
-<section class="sec" id="game">
-  <h2>Апгрейд</h2>
-  <div class="arena">
-    <div class="box glass"><h3>Ваши предметы <span id="selN"></span></h3>
-      <div class="grid" id="invGrid"></div>
-      <div class="total">Итого выбрано<b id="totV">0 $</b></div></div>
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
-      <div class="ring"><svg viewBox="0 0 220 220"><defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#2fce72"/><stop offset=".5" stop-color="#ffd166"/><stop offset="1" stop-color="#ff5468"/></linearGradient></defs>
-        <circle cx="110" cy="110" r="92" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="14"/>
-        <circle id="arc" cx="110" cy="110" r="92" fill="none" stroke="url(#rg)" stroke-width="14" stroke-linecap="round" style="transition:stroke-dasharray .25s"/></svg>
-        <div class="needle" id="needle"></div><div class="mid"><b id="ch">0%</b><span id="lvl"></span></div></div>
-      <div class="rowc" style="justify-content:center"><button class="chip" data-c="35">35%</button><button class="chip" data-c="50">50%</button><button class="chip" data-c="70">70%</button><input class="cust" id="cu" type="number" min="1" max="90" step="0.1" placeholder="свой %"></div>
-      <button class="go" id="go">АПГРЕЙД</button><i id="res" style="min-height:18px;font-weight:600"></i></div>
-    <div class="box glass"><h3>Цель апгрейда <span id="tgP"></span></h3>
-      <div class="grid" id="tgGrid"></div>
-      <div class="rowc"><input class="cust" id="tn" placeholder="своя цель" style="width:110px"><input class="cust" id="tp" type="number" placeholder="цена $" style="width:90px"><button class="btn o" id="tgSet" style="padding:7px 12px;font-size:12px">Задать</button></div></div>
+<div class="layout">
+  <aside>
+    <div id="topDropBox"></div>
+    <h4>Лайв дроп</h4>
+    <div id="feed"></div>
+  </aside>
+  <div class="content">
+    <div class="hero"><h1>Level Up Your Luck</h1><p>Апгрейд игровых предметов · by Litrerelly · только игровые коины</p></div>
+    <div class="icorow"><button class="ic" id="icI" title="Как это работает">i</button><button class="ic" id="icF" title="Быстрая анимация">⚡</button><button class="ic" id="icS" title="Звук">🔊</button></div>
+    <section class="sec" id="game">
+      <h2>Апгрейд</h2>
+      <div class="arena">
+        <div class="box glass"><h3>Выбрано для ставки <span id="selN"></span></h3>
+          <div class="chosen" id="chosenBox"></div>
+          <div class="total">Итого<b class="coin" id="totV">0</b></div></div>
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+          <div class="gauge"><span class="gl t">100%</span><span class="gl b">0%</span><span class="gl l">50%</span><span class="gl r">50%</span>
+            <div class="needle" id="needle"></div><div class="mid"><b id="ch">—</b><span id="lvl"></span></div></div>
+          <div class="rowc"><button class="chip" data-c="35">35%</button><button class="chip" data-c="50">50%</button><button class="chip" data-c="70">70%</button><input class="cust" id="cu" type="number" min="1" max="90" step="0.1" placeholder="свой %"></div>
+          <button class="go" id="go">АПГРЕЙД</button><i id="res" style="min-height:18px;font-weight:600;text-align:center"></i></div>
+        <div class="box glass"><h3>Цель апгрейда</h3>
+          <div class="tgprev" id="tgPrev"><span class="placeholder">Выберите цель ниже, в «Предметы для апгрейда»</span></div>
+          <div class="rowc"><input class="cust" id="tn" placeholder="своя цель" style="width:98px"><input class="cust" id="tp" type="number" placeholder="цена" style="width:70px"><button class="btn o" id="tgSet" style="padding:6px 10px;font-size:11px">Задать</button></div></div>
+      </div>
+      <div class="glass cashrow" style="margin-top:12px">
+        <span style="font-size:12px;color:var(--mut);white-space:nowrap">Добавить баланс</span>
+        <input type="range" id="cashR" min="0" max="0" value="0">
+        <input class="cust coin" id="cashN" type="number" min="0" value="0" style="width:96px">
+      </div>
+    </section>
+    <section class="sec" id="myshop">
+      <h2>Магазин <small>купить предмет за любую цену</small></h2>
+      <div class="box glass" style="min-height:0">
+        <div class="rowc" style="justify-content:flex-start"><input class="cust" id="bn" placeholder="название" style="width:150px"><input class="cust" id="bp" type="number" placeholder="цена" style="width:100px"><button class="btn g" id="bBuy" style="padding:10px 20px;font-size:14px">💰 Купить</button></div>
+        <div class="err" id="shopErr" style="color:var(--red);min-height:18px;font-size:12px"></div>
+      </div>
+    </section>
+    <section class="sec" id="myinv">
+      <h2>Мой инвентарь</h2>
+      <div class="box glass" style="min-height:0">
+        <div class="pickbar"><input class="f" id="invQ" placeholder="Поиск по инвентарю" style="max-width:260px"></div>
+        <div class="grid2" id="invGrid"></div>
+      </div>
+    </section>
+    <section class="sec" id="shop">
+      <h2>Предметы для апгрейда</h2>
+      <div class="box glass" style="min-height:0">
+        <div class="pickbar"><input class="f" id="tgQ" placeholder="Поиск предмета" style="max-width:220px"><input class="cust" id="tgMin" type="number" placeholder="от"><input class="cust" id="tgMax" type="number" placeholder="до"></div>
+        <div class="grid2" id="tgGrid" style="max-height:320px"></div>
+      </div>
+    </section>
+    <section class="sec" id="stats">
+      <h2>Статистика</h2>
+      <div class="stats"><div class="st glass"><small>Апгрейдов</small><b id="s1">0</b></div><div class="st glass"><small>Винрейт</small><b id="s2">0%</b></div><div class="st glass"><small>Побед</small><b class="g" id="s3">0</b></div><div class="st glass"><small>Поражений</small><b class="rd" id="s4">0</b></div><div class="st glass"><small>Профит</small><b class="coin" id="s5">0</b></div></div>
+      <p class="note">Игровой симулятор на очках без денежной стоимости: покупка, апгрейд и вывод — всё виртуально.</p>
+    </section>
   </div>
-</section>
-<section class="sec" id="shop">
-  <h2>Магазин предметов</h2>
-  <div class="box glass">
-    <div class="grid" id="shopGrid" style="max-height:170px"></div>
-    <div class="rowc"><input class="cust" id="bn" placeholder="название" style="width:130px"><input class="cust" id="bp" type="number" placeholder="цена $" style="width:100px"><button class="btn g" id="bBuy" style="padding:8px 16px">Купить за любую цену</button></div>
-    <div class="err" id="shopErr" style="color:var(--red);min-height:18px;font-size:12px"></div>
-  </div>
-</section>
-<section class="sec" id="stats">
-  <h2>Лайв дроп</h2><div id="feed"></div>
-  <h2 style="margin-top:16px">Статистика</h2>
-  <div class="stats"><div class="st glass"><small>Апгрейдов</small><b id="s1">0</b></div><div class="st glass"><small>Винрейт</small><b id="s2">0%</b></div><div class="st glass"><small>Побед</small><b class="g" id="s3">0</b></div><div class="st glass"><small>Поражений</small><b class="rd" id="s4">0</b></div><div class="st glass"><small>Профит</small><b id="s5">0</b></div></div>
-  <p class="note">Игровой симулятор на очках без денежной стоимости: покупка, апгрейд и вывод — всё виртуально.</p>
-</section>
-<div class="rb">OWNER BY LITERRELLY</div>
+</div>
+<button class="fab" id="fab" style="display:none">💬 Поддержка</button>
 
 <div class="md" id="info"><div class="mb"><h2>Как это работает</h2>
-  <p>Покупаете предмет за игровые $ — цена любая, до 500 000 $. Выбираете свои предметы для ставки, задаёте цель (каталог или своя), апгрейд крутит честный шанс = RTP × (сумма ÷ цена цели). Победа — забираете новый предмет, поражение — предметы сгорают. Реальных денег, вывода и торговли нет.</p>
+  <p>Покупаете предмет за коины — цена любая, до 500 000. Выбираете предметы и/или добавляете часть баланса в ставку, задаёте цель, апгрейд крутит честный шанс. Победа — забираете предмет цели, поражение — ставка сгорает.</p>
   <button class="btn d" id="infoX" style="width:100%">Понятно</button></div></div>
+
+<div class="md" id="promo"><div class="mb"><h2>Промокод</h2>
+  <input class="f" id="pcode" placeholder="Введите промокод"><div class="err" id="pErr"></div>
+  <div class="r"><button class="btn d" id="pGo" style="flex:1">Активировать</button><button class="btn o" id="pX">Закрыть</button></div></div></div>
+
+<div class="md" id="prof"><div class="mb"><div class="profile" id="profTop"></div>
+  <div id="topItemBox"></div>
+  <h2 style="margin-top:14px;font-size:18px">Инвентарь</h2>
+  <div id="profInv" class="tw" style="max-height:240px"></div>
+  <button class="btn o" id="profX" style="width:100%;margin-top:10px">Закрыть</button></div></div>
+
 <div class="md" id="adv"><div class="mb"><h2>Пополнение</h2>
-  <p>Посмотрите рекламу и получите <b>+<span id="adr">5 000</span> $</b> на баланс.</p>
-  <div class="ad" id="adslot" style="padding:0;overflow:hidden"><video id="advid" src="/ad.mp4" playsinline controls preload="metadata" style="width:100%;max-height:60vh;display:block"></video><span id="adph" style="display:none;padding:12px">Здесь будет реклама</span></div>
+  <p>Посмотрите рекламу и получите <b class="coin" id="adr">5 000</b> на баланс.</p>
+  <div class="ad" id="adslot"><video id="advid" src="/ad.mp4" playsinline controls preload="metadata" style="width:100%;max-height:60vh;display:block"></video><span id="adph" style="display:none;padding:12px">Здесь будет реклама</span></div>
   <a id="ttl" class="btn o" target="_blank" rel="noopener" style="display:none;text-decoration:none;margin-bottom:8px">Мой TikTok</a>
   <div class="err" id="adMsg" style="color:#1f7a4a"></div>
   <div class="r"><button class="btn d" id="adGo" style="flex:1">Смотреть рекламу</button><button class="btn o" id="adX">Закрыть</button></div></div></div>
-<div class="md" id="auth"><div class="mb"><div class="tabs"><button class="btn d" id="tL">Вход</button><button class="btn o" id="tR">Регистрация</button></div>
+
+<div class="md" id="auth"><div class="mb">
+  <div class="gbox" id="gbtn"></div>
+  <a class="steambtn" id="steamB" href="/auth/steam">Войти через Steam</a>
+  <div class="or">или через почту</div>
+  <div class="tabs"><button class="btn d" id="tL">Вход</button><button class="btn o" id="tR">Регистрация</button></div>
   <input class="f" id="em" type="text" placeholder="Почта или ник" autocomplete="username"><input class="f" id="pw" type="password" placeholder="Пароль (от 6 символов)" autocomplete="current-password">
   <div class="err" id="er"></div><button class="btn d" id="ok" style="width:100%">Войти</button></div></div>
-<div class="md" id="adm"><div class="mb" style="max-width:560px"><h2>Админ-панель</h2>
-  <div style="margin-bottom:12px">RTP, %: <input class="cust" id="rtpI" type="number" min="50" max="100" step="0.5"> <button class="btn d" id="rtpS">Применить</button></div>
-  <input class="f" id="sq" placeholder="Поиск игрока по почте или нику">
-  <div class="tw"><table id="ut"></table></div>
-  <div id="sp" style="display:none" class="spx"><div><b id="sn"></b> · баланс <b id="sb"></b></div>
-    <input class="f" id="amt" inputmode="numeric" placeholder="Сумма" autocomplete="off">
-    <div class="r"><button class="btn d" id="aAdd">+ Добавить</button><button class="btn d" id="aSub">− Списать</button><button class="btn o" id="aSet">Установить</button></div>
-    <div class="r"><button class="btn o" data-q="10000">+10k</button><button class="btn o" data-q="100000">+100k</button><button class="btn o" data-q="1000000">+1M</button><button class="btn o" data-q="10000000">+10M</button></div>
-    <input class="f" id="np" type="text" placeholder="Новый пароль для игрока" autocomplete="off"><button class="btn o" id="npB">Сбросить пароль</button><div class="err" id="ae"></div></div>
-  <button class="btn o" id="admX" style="margin-top:14px">Закрыть</button></div></div>
+
+<div class="md" id="chat"><div class="mb"><h2 id="chatTitle">Поддержка</h2>
+  <div class="chatwrap"><div class="chatlog" id="chatLog"></div>
+  <div class="chatin"><input class="f" id="chatMsg" placeholder="Сообщение"><button class="btn d" id="chatSend">➤</button></div></div>
+  <button class="btn o" id="chatX" style="width:100%;margin-top:10px">Закрыть</button></div></div>
+
+<div class="md" id="adm"><div class="mb admin-dark"><h2>⚙ Консоль</h2>
+  <div class="astat"><div><small>Игроков</small><b id="axN">0</b></div><div><small>Коинов в игре</small><b class="coin" id="axB">0</b></div></div>
+  <div class="tabs">
+    <button class="atab on" data-t="bal">Баланс</button><button class="atab" data-t="role">Роли</button>
+    <button class="atab" data-t="cat">Каталог</button><button class="atab" data-t="promo">Промокоды</button>
+    <button class="atab" data-t="sup">Поддержка</button><button class="atab" data-t="set">Настройки</button>
+  </div>
+
+  <div class="apane on" id="pane-bal">
+    <input class="f" id="sq" placeholder="Поиск игрока по почте или нику">
+    <div class="tw"><table id="ut"></table></div>
+    <div id="sp" style="display:none" class="spx"><div><b id="sn"></b> · баланс <b class="coin" id="sb"></b></div>
+      <input class="f" id="amt" inputmode="numeric" placeholder="Сумма" autocomplete="off">
+      <div class="r"><button class="btn d" id="aAdd">+ Добавить</button><button class="btn d" id="aSub">− Списать</button><button class="btn o" id="aSet">Установить</button></div>
+      <div class="r"><button class="btn o" data-q="10000">+10k</button><button class="btn o" data-q="100000">+100k</button><button class="btn o" data-q="1000000">+1M</button></div>
+      <input class="f" id="np" type="text" placeholder="Новый пароль для игрока" autocomplete="off"><button class="btn o" id="npB">Сбросить пароль</button></div>
+  </div>
+
+  <div class="apane" id="pane-role">
+    <input class="f" id="rq" placeholder="Поиск игрока">
+    <div class="tw"><table id="rt"></table></div>
+    <div id="rsp" style="display:none" class="spx"><b id="rn"></b>
+      <div class="r" id="roleBtns"></div></div>
+  </div>
+
+  <div class="apane" id="pane-cat">
+    <div class="r"><input class="f" id="cq" placeholder="Поиск по каталогу" style="max-width:200px"></div>
+    <div class="tw" style="max-height:220px"><table id="ct"></table></div>
+    <h3 style="font-size:13px;margin:10px 0 6px">Добавить предмет</h3>
+    <div class="r"><input class="f" id="caN" placeholder="Название" style="max-width:160px"><input class="cust" id="caP" type="number" placeholder="цена"></div>
+    <div class="r"><select class="cust" id="caIc"><option value="knife">нож</option><option value="gun">пистолет</option><option value="rifle">автомат</option><option value="glove">перчатки</option><option value="charm" selected>брелок</option><option value="sticker">наклейка</option><option value="case">кейс</option></select>
+      <input class="cust" id="caImg" placeholder="фото: имя файла или URL" style="width:170px"></div>
+    <button class="btn d" id="caAdd" style="width:100%;margin-top:6px">Добавить в каталог</button>
+    <p class="err" style="color:#6b6250;font-size:11px">Фото: залейте файл в папку img в репозитории и впишите его имя, например knife1.png</p>
+  </div>
+
+  <div class="apane" id="pane-promo">
+    <div class="r"><input class="f" id="prC" placeholder="Код (например VIP2026)" style="max-width:160px"><input class="cust" id="prA" type="number" placeholder="сумма"><input class="cust" id="prU" type="number" placeholder="лимит (пусто=∞)"></div>
+    <button class="btn d" id="prAdd" style="width:100%;margin:6px 0">Создать промокод</button>
+    <div class="tw"><table id="pt"></table></div>
+  </div>
+
+  <div class="apane" id="pane-sup">
+    <div class="tw" id="supList" style="max-height:200px"></div>
+    <div id="supThread" style="display:none">
+      <b id="supUser"></b>
+      <div class="chatlog" id="supLog" style="max-height:200px;overflow-y:auto;margin:8px 0"></div>
+      <div class="r"><input class="cust" id="supCredit" type="number" placeholder="начислить"></div>
+      <div class="chatin"><input class="f" id="supMsg" placeholder="Ответ"><button class="btn d" id="supSend">Отправить</button></div>
+      <button class="btn o" id="supClose" style="margin-top:6px">Закрыть обращение</button>
+    </div>
+  </div>
+
+  <div class="apane" id="pane-set">
+    <div>RTP, % <input class="cust" id="rtpI" type="number" min="50" max="100" step="0.5"> <button class="btn d" id="rtpS">Применить</button></div>
+  </div>
+  <button class="btn o" id="admX" style="margin-top:14px;width:100%">Закрыть</button></div></div>
 
 <script>
 const $=i=>document.getElementById(i),F=n=>Math.round(n).toLocaleString('ru-RU').replace(/\u00a0/g,' ');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),num=v=>parseInt(String(v).replace(/\D/g,''))||0;
-const CATALOG=[{n:'Брелок «Оригами Лис»',p:900,i:'🦊'},{n:'Наклейка «Засада»',p:1500,i:'⭐'},{n:'Пистолет «Неоновый пульс»',p:9000,i:'🔫'},
-{n:'Перчатки «Шторм»',p:22000,i:'🧤'},{n:'Пистолет «Огненный лис»',p:38000,i:'🔫'},{n:'Автомат «Полночь»',p:60000,i:'💥'},
-{n:'Скин «Тигриный год»',p:96000,i:'🎯'},{n:'Клинок «Ледяной шторм»',p:180000,i:'🔪'},{n:'Клинок «Солнцестояние»',p:260000,i:'🗡️'},{n:'Нож «Аркан-всплеск»',p:500000,i:'🗡️'}];
-let tok='',me=null,lastBal=null,rtp=95,mode='L',feed=[],inv=[],selIds=new Set(),target=null,fast=false,muted=false,busy=false,rot=0;
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;$('toasts').appendChild(t);setTimeout(()=>t.remove(),2800)}
+const ICONS={knife:'<svg viewBox="0 0 40 40"><path d="M8 30L28 10l4 4L12 34z" fill="#dfe6f2"/><path d="M28 10l4 4-3 3-4-4z" fill="#8b93ad"/><rect x="6" y="30" width="8" height="4" rx="1" fill="#7a5200" transform="rotate(-45 10 32)"/></svg>',
+gun:'<svg viewBox="0 0 40 40"><rect x="8" y="18" width="20" height="6" rx="2" fill="#c7cede"/><rect x="26" y="14" width="6" height="10" rx="1" fill="#8b93ad"/><rect x="10" y="24" width="5" height="10" rx="1" fill="#5b6178"/></svg>',
+rifle:'<svg viewBox="0 0 40 40"><rect x="4" y="19" width="30" height="5" rx="2" fill="#c7cede"/><rect x="30" y="16" width="6" height="8" fill="#8b93ad"/><rect x="10" y="24" width="4" height="9" fill="#5b6178"/><rect x="4" y="17" width="8" height="3" fill="#f2a93c"/></svg>',
+charm:'<svg viewBox="0 0 40 40"><circle cx="20" cy="18" r="10" fill="none" stroke="#ffcf6b" stroke-width="3"/><path d="M20 28v8" stroke="#8b93ad" stroke-width="2"/></svg>',
+glove:'<svg viewBox="0 0 40 40"><path d="M10 34V16a4 4 0 018 0v-4a3 3 0 016 0v3a3 3 0 016 0v2a3 3 0 016 0v13a6 6 0 01-6 6H16a6 6 0 01-6-6z" fill="#20c997"/></svg>',
+sticker:'<svg viewBox="0 0 40 40"><path d="M20 6l4 8 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z" fill="#ff5a6e"/></svg>',
+case:'<svg viewBox="0 0 40 40"><rect x="6" y="12" width="28" height="20" rx="3" fill="#8b93ad"/><rect x="6" y="12" width="28" height="6" fill="#5b6178"/><circle cx="20" cy="24" r="4" fill="#ffcf6b"/></svg>'};
+function imgSrc(v){return /^https?:\/\//.test(v)?v:'/img/'+v}
+window.__imgFail=(el,ic)=>{const s=document.createElement('span');s.className='ic2';s.innerHTML=ICONS[ic]||ICONS.charm;el.replaceWith(s)};
+function media(it,cls){const ic=it.ic||'charm';return it.img?`<img class="${cls}" src="${imgSrc(it.img)}" onerror="__imgFail(this,'${ic}')">`:`<span class="${cls}">${ICONS[ic]||ICONS.charm}</span>`}
+const ROLE_NAMES={senior:'Старший админ',admin:'Админ',helper:'Хелпер',creator:'Контент-крейтор',user:''};
+function roleBadge(r){return r&&r!=='user'?` <span class="rolebadge rb-${r}">${ROLE_NAMES[r]}</span>`:''}
+
+let tok='',me=null,lastBal=null,rtp=95,mode='L',feed=[],inv=[],catalog=[],selIds=new Set(),target=null,fast=false,muted=false,busy=false,rot=0,gClientId='',cash=0;
 try{tok=localStorage.getItem('apg_t')||'';fast=localStorage.getItem('apg_fast')=='1';muted=localStorage.getItem('apg_mute')=='1'}catch(e){}
 let ac=null;function actx(){if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}return ac}
 function beep(f,d,type,vol){if(muted)return;const c=actx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.value=0;o.connect(g);g.connect(c.destination);const t=c.currentTime;
@@ -192,86 +362,168 @@ $('icI').onclick=()=>$('info').classList.add('on');$('infoX').onclick=()=>$('inf
 async function api(p,b){let r;try{r=await fetch('/api/'+p,{method:b?'POST':'GET',headers:{'Content-Type':'application/json',Authorization:'Bearer '+tok},body:b?JSON.stringify(b):undefined})}catch(e){throw new Error('Нет связи с сервером')}
   const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Ошибка сервера');return d}
 
-function renderFeed(){$('feed').innerHTML=feed.map(f=>`<div class="drop glass ${f.w?'':'l'}"><small>${esc(f.e)}</small><b>${f.w?'+':'−'}${F(f.a)} $</b><small>x${(+f.m).toFixed(2)} · ${(+f.c).toFixed(1)}%</small></div>`).join('')||'<small style="color:var(--mut)">Пока пусто</small>'}
-function itemCard(it,cls){return `<button class="pk ${cls}" data-id="${it.id||''}"><span class="em">${it.i||'🎁'}</span><span class="nm">${esc(it.name||it.n)}</span><span class="pr">${F(it.price!=null?it.price:it.p)} $</span></button>`}
-function renderShop(){$('shopGrid').innerHTML=CATALOG.map(c=>`<button class="pk" data-buy="${c.p}" data-nm="${esc(c.n)}"><span class="em">${c.i}</span><span class="nm">${c.n}</span><span class="pr">${F(c.p)} $</span></button>`).join('');
-  $('shopGrid').querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>doBuy(b.dataset.nm,+b.dataset.buy))}
-function renderTarget(){$('tgGrid').innerHTML=CATALOG.map(c=>`<button class="pk tg ${target&&target.name===c.n&&target.price===c.p?'tgsel':''}" data-nm="${esc(c.n)}" data-p="${c.p}"><span class="em">${c.i}</span><span class="nm">${c.n}</span><span class="pr">${F(c.p)} $</span></button>`).join('');
-  $('tgGrid').querySelectorAll('[data-nm]').forEach(b=>b.onclick=()=>{target={name:b.dataset.nm,price:+b.dataset.p};sSel();updateChance()});
-  $('tgP').textContent=target?'· '+target.name:''}
-function renderInv(){$('invGrid').innerHTML=inv.length?inv.map(it=>itemCard(it,selIds.has(it.id)?'sel':'')).join(''):'<div class="empty">Пусто — купите предмет в магазине</div>';
-  $('invGrid').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{const id=b.dataset.id;selIds.has(id)?selIds.delete(id):selIds.add(id);sSel();updateChance()})}
+function renderFeed(){$('feed').innerHTML=feed.map(f=>`<div class="dropcard ${f.w?'':'l'}"><small>${esc(f.e)}</small><b class="coin">${f.w?'+':'−'}${F(f.a)}</b><small>x${(+f.m).toFixed(2)} · ${(+f.c).toFixed(1)}%</small></div>`).join('')||'<small style="color:var(--mut)">Пока пусто</small>';
+  const top=feed.filter(f=>f.w).sort((a,b)=>b.a-a.a)[0];
+  $('topDropBox').innerHTML=top?`<div class="topdrop"><h4>Топ дроп</h4>${media({ic:'knife'},'ic2')}<b class="coin" style="display:block;font-size:16px">${F(top.a)}</b><small style="color:var(--mut)">${(+top.c).toFixed(1)}% шанс</small></div>`:''}
+function itemCard(it,cls,extra){return `<button class="pk ${cls}" data-id="${it.id||''}">${media(it,'ic2')}<span class="nm">${esc(it.name||it.n)}</span><span class="pr coin">${F(it.price!=null?it.price:it.p)}</span>${extra||''}</button>`}
+function renderTgGrid(){const q=($('tgQ').value||'').toLowerCase(),mn=+$('tgMin').value||0,mx=+$('tgMax').value||1e9;
+  const list=catalog.filter(c=>c.name.toLowerCase().includes(q)&&c.price>=mn&&c.price<=mx);
+  $('tgGrid').innerHTML=list.length?list.map(c=>itemCard(c,target&&target.id===c.id?'tgsel':'')).join(''):'<div class="empty">Ничего не найдено</div>';
+  $('tgGrid').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{const c=catalog.find(x=>x.id===b.dataset.id);if(!c)return;target={id:c.id,name:c.name,price:c.price,ic:c.ic,img:c.img};sSel();renderTgGrid();renderTgPrev();updateChance()})}
+function renderTgPrev(){$('tgPrev').innerHTML=target?`${media(target,'ic2')}<b>${esc(target.name)}</b><span class="coin">${F(target.price)}</span>`:'<span class="placeholder">Выберите цель ниже, в «Предметы для апгрейда»</span>'}
+function renderChosen(){const chosen=inv.filter(it=>selIds.has(it.id));
+  $('chosenBox').innerHTML=chosen.length?chosen.map(it=>`<span class="cchip">${esc(it.name)} · ${F(it.price)}<button data-rm="${it.id}">×</button></span>`).join(''):'<span class="placeholder">Выберите ниже, в «Мой инвентарь»</span>';
+  $('chosenBox').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{selIds.delete(b.dataset.rm);sSel();renderChosen();renderInvGrid();updateChance()})}
+function renderInvGrid(){const q=($('invQ').value||'').toLowerCase();const list=inv.filter(it=>it.name.toLowerCase().includes(q));
+  $('invGrid').innerHTML=list.length?list.map(it=>itemCard(it,selIds.has(it.id)?'sel':'')).join(''):'<div class="empty">Пусто — купите предмет в магазине</div>';
+  $('invGrid').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{const id=b.dataset.id;selIds.has(id)?selIds.delete(id):selIds.add(id);sSel();renderChosen();renderInvGrid();updateChance()})}
 function selTotal(){return inv.filter(it=>selIds.has(it.id)).reduce((s,it)=>s+it.price,0)}
-function updateChance(){const total=selTotal();$('totV').textContent=F(total)+' $';$('selN').textContent=selIds.size?'· выбрано '+selIds.size:'';
-  const C=2*Math.PI*92;let ch=0;
-  if(target&&total>0)ch=clamp(rtp*total/target.price,0,100);
-  $('arc').setAttribute('stroke-dasharray',(C*Math.min(ch,100)/100)+' '+C);$('ch').textContent=ch?ch.toFixed(1)+'%':'—';
-  $('lvl').textContent=!target||!total?'выберите предметы и цель':ch>=60?'высокий шанс':ch>=30?'средний шанс':ch>=10?'низкий шанс':'большой риск';
+function updateChance(){const total=selTotal()+cash;$('totV').textContent=F(total);$('selN').textContent=selIds.size?'· '+selIds.size:'';
+  $('cashR').max=me?me.bal:0;if(+$('cashR').value!==cash)$('cashR').value=cash;if(+$('cashN').value!==cash)$('cashN').value=cash;
+  let ch=0;if(target&&total>0)ch=clamp(rtp*total/target.price,0,100);
+  const angle=180+ch/100*360;if(!busy)$('needle').style.transition='transform .35s ease';if(!busy)$('needle').style.transform=`rotate(${angle}deg)`;
+  $('ch').textContent=ch?ch.toFixed(1)+'%':'—';$('ch').style.color=!ch?'':ch>=60?'var(--green)':ch>=30?'#ffe066':'var(--red)';
+  $('lvl').textContent=!target||!total?'выберите ставку и цель':ch>=60?'высокий шанс':ch>=30?'средний шанс':ch>=10?'низкий шанс':'большой риск';
   $('go').disabled=busy||!me||total<=0||!target||ch<1||ch>90}
-document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{sClick();const total=selTotal();if(!total)return;
-  const price=Math.min(500000,Math.max(1,Math.round(total*rtp/+b.dataset.c)));target={name:'Новый предмет',price};$('cu').value='';renderTarget();updateChance()});
-$('cu').oninput=e=>{const v=parseFloat(e.target.value);const total=selTotal();if(!v||!total)return;
-  const price=Math.min(500000,Math.max(1,Math.round(total*rtp/v)));target={name:'Новый предмет',price};renderTarget();updateChance()};
+document.querySelectorAll('#game [data-c]').forEach(b=>b.onclick=()=>{sClick();const total=selTotal()+cash;if(!total)return;
+  const price=Math.min(500000,Math.max(1,Math.round(total*rtp/+b.dataset.c)));target={name:'Новый предмет',price,ic:'charm'};$('cu').value='';renderTgPrev();renderTgGrid();updateChance()});
+$('cu').oninput=e=>{const v=parseFloat(e.target.value);const total=selTotal()+cash;if(!v||!total)return;
+  const price=Math.min(500000,Math.max(1,Math.round(total*rtp/v)));target={name:'Новый предмет',price,ic:'charm'};renderTgPrev();renderTgGrid();updateChance()};
 $('tgSet').onclick=()=>{const nm=$('tn').value.trim()||'Свой предмет',p=Math.min(500000,Math.max(1,num($('tp').value)));if(!num($('tp').value))return;
-  target={name:nm,price:p};sSel();renderTarget();updateChance()};
+  target={name:nm,price:p,ic:'charm'};sSel();renderTgPrev();renderTgGrid();updateChance()};
+$('cashR').oninput=e=>{cash=Math.min(me?me.bal:0,+e.target.value||0);updateChance()};
+$('cashN').oninput=e=>{cash=Math.min(me?me.bal:0,Math.max(0,num(e.target.value)));updateChance()};
+$('invQ').oninput=renderInvGrid;$('tgQ').oninput=renderTgGrid;$('tgMin').oninput=renderTgGrid;$('tgMax').oninput=renderTgGrid;
 
-async function doBuy(name,price){$('shopErr').textContent='';try{const d=await api('buy',{name,price});me.bal=d.bal;inv=d.inv;sBuy();renderInv();render()}catch(e){$('shopErr').textContent=e.message}}
+async function doBuy(name,price){$('shopErr').textContent='';try{const d=await api('buy',{name,price});me.bal=d.bal;inv=d.inv;sBuy();toast('Куплено: '+name);renderInvGrid();renderChosen();render()}catch(e){$('shopErr').textContent=e.message}}
 $('bBuy').onclick=()=>{const nm=$('bn').value.trim(),p=num($('bp').value);if(!nm)return $('shopErr').textContent='Введите название предмета';
-  if(!p)return $('shopErr').textContent='Введите цену';doBuy(nm,p)};
+  if(!p)return $('shopErr').textContent='Введите цену';doBuy(nm,p);$('bn').value='';$('bp').value=''};
 
+function avatarHTML(u,size){return u.avatar?`<img class="av" src="${u.avatar}" style="width:${size}px;height:${size}px" referrerpolicy="no-referrer">`:`<span class="avph" style="width:${size}px;height:${size}px;font-size:${size*.4}px">${esc((u.disp||u.name||'?')[0].toUpperCase())}</span>`}
 function render(){
   if(me){if(lastBal!==null&&me.bal!==lastBal){const dif=me.bal-lastBal,el=$('bal'),bd=$('bd');el.classList.remove('fu','fd');bd.classList.remove('on');void el.offsetWidth;
-    el.classList.add(dif>0?'fu':'fd');bd.textContent=(dif>0?'+':'−')+F(Math.abs(dif))+' $';bd.style.color=dif>0?'#2fce72':'#ff5468';bd.classList.add('on')}lastBal=me.bal}else lastBal=null;
-  $('bal').textContent=me?F(me.bal)+' $':'—';$('accB').textContent=me?'Выйти':'Войти';$('admB').style.display=me&&me.admin?'':'none';$('rtpP').textContent='RTP '+rtp+'%';
+    el.classList.add(dif>0?'fu':'fd');bd.textContent=(dif>0?'+':'−')+F(Math.abs(dif));bd.style.color=dif>0?'#2fce72':'#ff5a6e';bd.classList.add('on')}lastBal=me.bal}else lastBal=null;
+  $('bal').textContent=me?F(me.bal):'—';$('accB').textContent=me?'Выйти':'Войти';
+  const staff=me&&me.role&&me.role!=='user';$('admB').style.display=staff?'':'none';$('fab').style.display=me?'':'none';
+  $('avWrap').style.display=me?'':'none';if(me)$('avWrap').innerHTML=avatarHTML(me,34);
   $('s1').textContent=st.n;$('s2').textContent=(st.n?(st.w/st.n*100).toFixed(1):0)+'%';$('s3').textContent=st.w;$('s4').textContent=st.l;
-  const p=$('s5');p.textContent=(st.pr>0?'+':'')+F(st.pr);p.className=st.pr>0?'g':st.pr<0?'rd':'';renderFeed();updateChance();
+  const p=$('s5');p.textContent=(st.pr>0?'+':'')+F(st.pr);p.className='coin '+(st.pr>0?'g':st.pr<0?'rd':'');renderFeed();updateChance();
 }
 let st={n:0,w:0,l:0,pr:0};
 async function loadFeed(){if(busy)return;try{feed=(await api('feed')).feed;renderFeed()}catch(e){}}
-async function refreshMe(){const d=await api('me');me=d.user;rtp=d.rtp;const iv=await api('inventory');inv=iv.inv;renderInv();render()}
+async function loadCatalog(){try{catalog=(await api('catalog')).catalog;renderTgGrid()}catch(e){}}
+async function refreshMe(){const d=await api('me');me=d.user;const iv=await api('inventory');inv=iv.inv;renderInvGrid();renderChosen();render()}
 function setMode(m){mode=m;$('tL').className='btn '+(m=='L'?'d':'o');$('tR').className='btn '+(m=='R'?'d':'o');$('ok').textContent=m=='L'?'Войти':'Создать аккаунт';$('er').textContent=''}
 $('tL').onclick=()=>setMode('L');$('tR').onclick=()=>setMode('R');
-$('accB').onclick=()=>{if(me){me=null;tok='';inv=[];selIds.clear();try{localStorage.removeItem('apg_t')}catch(e){}Object.assign(st,{n:0,w:0,l:0,pr:0});renderInv();render();$('auth').classList.add('on')}else $('auth').classList.add('on')};
+function openAuth(){$('auth').classList.add('on');if(gClientId&&window.google){try{google.accounts.id.renderButton($('gbtn'),{theme:'filled_black',size:'large',shape:'pill',width:280})}catch(e){}}}
+$('accB').onclick=()=>{if(me){me=null;tok='';inv=[];selIds.clear();try{localStorage.removeItem('apg_t')}catch(e){}Object.assign(st,{n:0,w:0,l:0,pr:0});renderInvGrid();renderChosen();render();openAuth()}else openAuth()};
+async function afterLogin(d){tok=d.token;try{localStorage.setItem('apg_t',tok)}catch(e){}me=d.user;$('auth').classList.remove('on');await refreshMe()}
 $('ok').onclick=async()=>{const id=$('em').value.trim(),p=$('pw').value;if(!id)return $('er').textContent='Введите почту или ник';
-  try{const d=mode=='R'?await api('register',{email:id,password:p}):await api('login',{id,password:p});tok=d.token;try{localStorage.setItem('apg_t',tok)}catch(e){}
-    me=d.user;$('auth').classList.remove('on');$('pw').value='';await refreshMe()}catch(e){$('er').textContent=e.message}};
+  try{const d=mode=='R'?await api('register',{email:id,password:p}):await api('login',{id,password:p});$('pw').value='';await afterLogin(d)}catch(e){$('er').textContent=e.message}};
+window.onGoogleCredential=async(resp)=>{try{const d=await api('google',{credential:resp.credential});await afterLogin(d)}catch(e){$('er').textContent=e.message}};
+
+$('promoB').onclick=()=>{if(!me)return openAuth();$('pErr').textContent='';$('pcode').value='';$('promo').classList.add('on')};
+$('pX').onclick=()=>$('promo').classList.remove('on');
+$('pGo').onclick=async()=>{try{const d=await api('promo/redeem',{code:$('pcode').value});me.bal=d.bal;render();sWin();toast('+'+F(d.amount)+' коинов по промокоду');$('promo').classList.remove('on')}catch(e){$('pErr').textContent=e.message}};
+
+$('avWrap').onclick=async()=>{if(!me)return;$('profTop').innerHTML=avatarHTML(me,72)+`<div style="font-weight:700;font-size:17px">${esc(me.disp||me.name)}${roleBadge(me.role)}</div><div style="color:#6b6250">${F(me.bal)} коинов</div>`;
+  const top=inv.slice().sort((a,b)=>b.price-a.price)[0];
+  $('topItemBox').innerHTML=top?`<div class="topitem">🏆 Самый дорогой предмет<br><b>${esc(top.name)}</b> — ${F(top.price)} коинов</div>`:'';
+  $('profInv').innerHTML=inv.length?inv.slice().sort((a,b)=>b.price-a.price).map(it=>`<div class="invrow"><span>${esc(it.name)} · ${F(it.price)}</span><button data-sell="${it.id}">Продать</button></div>`).join('')
+    :'<div class="empty" style="padding:16px">Инвентарь пуст</div>';
+  $('profInv').querySelectorAll('[data-sell]').forEach(b=>b.onclick=async()=>{try{const d=await api('sell',{id:b.dataset.sell});me.bal=d.bal;inv=d.inv;selIds.delete(b.dataset.sell);renderInvGrid();renderChosen();render();$('avWrap').click()}catch(e){}});
+  $('prof').classList.add('on')};
+$('profX').onclick=()=>$('prof').classList.remove('on');
+
+document.querySelectorAll('.atab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.atab').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('.apane').forEach(x=>x.classList.remove('on'));$('pane-'+b.dataset.t).classList.add('on');
+  if(b.dataset.t=='role')loadRoles();if(b.dataset.t=='cat')loadCatAdmin();if(b.dataset.t=='promo')loadPromoAdmin();if(b.dataset.t=='sup')loadSupList()});
+
 let sel=null,q='';
 async function admin(){$('rtpI').value=rtp;try{const d=await api('admin/users?q='+encodeURIComponent(q));
-    $('ut').innerHTML=d.users.map(u=>`<tr data-e="${esc(u.name)}" data-b="${u.bal}" class="${u.name===sel?'sel':''}"><td>${esc(u.name)}${u.admin?' ★':''}</td><td style="text-align:right">${F(u.bal)} $</td></tr>`).join('')||'<tr><td>Никого не найдено</td></tr>';
+    $('axN').textContent=d.users.length;$('axB').textContent=F(d.users.reduce((s,u)=>s+u.bal,0));
+    $('ut').innerHTML=d.users.map(u=>`<tr data-e="${esc(u.name)}" data-b="${u.bal}" class="${u.name===sel?'sel':''}"><td>${esc(u.disp||u.name)}${roleBadge(u.role)}</td><td style="text-align:right">${F(u.bal)}</td></tr>`).join('')||'<tr><td>Никого не найдено</td></tr>';
     $('ut').querySelectorAll('tr[data-e]').forEach(r=>r.onclick=()=>{sel=r.dataset.e;admin()});
     const row=sel&&$('ut').querySelector(`tr[data-e="${CSS.escape(sel)}"]`);$('sp').style.display=row?'block':'none';
-    if(row){$('sn').textContent=sel;$('sb').textContent=F(+row.dataset.b)+' $'}$('ae').textContent=''
-  }catch(e){$('ae').textContent=e.message}$('adm').classList.add('on')}
-async function adj(m,a){if(!sel)return;try{await api('admin/balance',{id:sel,mode:m,amount:a});await admin();if(me&&sel===me.name)await refreshMe()}catch(e){$('ae').textContent=e.message}}
+    if(row){$('sn').textContent=sel;$('sb').textContent=F(+row.dataset.b)}
+  }catch(e){}$('adm').classList.add('on')}
+async function adj(m,a){if(!sel)return;try{await api('admin/balance',{id:sel,mode:m,amount:a});await admin();if(me&&sel===me.name)await refreshMe()}catch(e){toast(e.message)}}
 $('admB').onclick=admin;$('admX').onclick=()=>$('adm').classList.remove('on');
 $('sq').oninput=e=>{q=e.target.value.trim().toLowerCase();admin()};
 $('aAdd').onclick=()=>adj('add',num($('amt').value));$('aSub').onclick=()=>adj('sub',num($('amt').value));$('aSet').onclick=()=>adj('set',num($('amt').value));
-document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>adj('add',+b.dataset.q));
-$('npB').onclick=async()=>{try{await api('admin/password',{id:sel,password:$('np').value});$('np').value='';$('ae').textContent='Пароль изменён'}catch(e){$('ae').textContent=e.message}};
-$('rtpS').onclick=async()=>{try{const d=await api('admin/rtp',{rtp:parseFloat($('rtpI').value)});rtp=d.rtp;render()}catch(e){$('ae').textContent=e.message}};
+document.querySelectorAll('#pane-bal [data-q]').forEach(b=>b.onclick=()=>adj('add',+b.dataset.q));
+$('npB').onclick=async()=>{try{await api('admin/password',{id:sel,password:$('np').value});$('np').value='';toast('Пароль изменён')}catch(e){toast(e.message)}};
+$('rtpS').onclick=async()=>{try{const d=await api('admin/rtp',{rtp:parseFloat($('rtpI').value)});rtp=d.rtp;render()}catch(e){toast(e.message)}};
 
-$('go').onclick=async()=>{if(!me||busy||!target||selIds.size===0)return;
-  busy=true;$('res').textContent='';const ids=[...selIds],total=selTotal(),tg=target;render();
-  try{const d=await api('upgrade',{ids,target:tg.price,name:tg.name});
-    const dur=fast?900:3100,turns=fast?2:5;rot=Math.ceil(rot/360)*360+turns*360+d.angle;$('needle').style.transform=`rotate(${rot}deg)`;
+let rsel=null,rq='';
+async function loadRoles(){try{const d=await api('admin/users?q='+encodeURIComponent(rq));
+  $('rt').innerHTML=d.users.map(u=>`<tr data-e="${esc(u.name)}" class="${u.name===rsel?'sel':''}"><td>${esc(u.disp||u.name)}${roleBadge(u.role)}</td></tr>`).join('');
+  $('rt').querySelectorAll('tr[data-e]').forEach(r=>r.onclick=()=>{rsel=r.dataset.e;showRoleBtns();$('rn').textContent=rsel;$('rsp').style.display='block'})
+}catch(e){}}
+function showRoleBtns(){$('roleBtns').innerHTML=['user','creator','helper','admin','senior'].map(r=>`<button class="btn o" data-role="${r}">${ROLE_NAMES[r]||'Игрок'}</button>`).join('');
+  $('roleBtns').querySelectorAll('[data-role]').forEach(b=>b.onclick=async()=>{try{await api('admin/role',{id:rsel,role:b.dataset.role});toast('Роль изменена');loadRoles()}catch(e){toast(e.message)}})}
+$('rq').oninput=e=>{rq=e.target.value.trim().toLowerCase();loadRoles()};
+
+async function loadCatAdmin(){try{catalog=(await api('catalog')).catalog;renderCatAdmin()}catch(e){}}
+function renderCatAdmin(){const q=($('cq').value||'').toLowerCase();const list=catalog.filter(c=>c.name.toLowerCase().includes(q));
+  $('ct').innerHTML=list.map(c=>`<tr><td>${esc(c.name)}</td><td>${F(c.price)}</td><td><button class="btn o" data-del="${c.id}" style="padding:4px 8px;font-size:11px">Удалить</button></td></tr>`).join('');
+  $('ct').querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{try{const d=await api('admin/catalog/remove',{id:b.dataset.del});catalog=d.catalog;renderCatAdmin();renderTgGrid()}catch(e){toast(e.message)}})}
+$('cq').oninput=renderCatAdmin;
+$('caAdd').onclick=async()=>{const name=$('caN').value.trim(),price=num($('caP').value);if(!name||!price)return toast('Укажите название и цену');
+  try{const d=await api('admin/catalog/add',{name,price,ic:$('caIc').value,img:$('caImg').value.trim()});catalog=d.catalog;renderCatAdmin();renderTgGrid();$('caN').value='';$('caP').value='';$('caImg').value='';toast('Добавлено в каталог')}catch(e){toast(e.message)}};
+
+async function loadPromoAdmin(){try{const d=await api('admin/promo');renderPromoAdmin(d.promos)}catch(e){}}
+function renderPromoAdmin(p){$('pt').innerHTML=Object.keys(p).map(c=>`<tr><td>${esc(c)}</td><td>${F(p[c].amount)}</td><td>${(p[c].usedBy||[]).length}${p[c].uses?'/'+p[c].uses:''}</td><td><button class="btn o" data-delp="${esc(c)}" style="padding:4px 8px;font-size:11px">Удалить</button></td></tr>`).join('')||'<tr><td>Промокодов нет</td></tr>';
+  $('pt').querySelectorAll('[data-delp]').forEach(b=>b.onclick=async()=>{try{const d=await api('admin/promo/delete',{code:b.dataset.delp});renderPromoAdmin(d.promos)}catch(e){}})}
+$('prAdd').onclick=async()=>{const code=$('prC').value.trim(),amount=num($('prA').value),uses=$('prU').value?num($('prU').value):null;if(!code||!amount)return toast('Укажите код и сумму');
+  try{const d=await api('admin/promo',{code,amount,uses});renderPromoAdmin(d.promos);$('prC').value='';$('prA').value='';$('prU').value='';toast('Промокод создан')}catch(e){toast(e.message)}};
+
+let supSel=null;
+async function loadSupList(){try{const d=await api('support/list');
+  $('supList').innerHTML=d.list.length?('<table>'+d.list.map(t=>`<tr data-u="${esc(t.user)}"><td>${esc(t.user)}<br><small style="color:#9aa3c2">${esc(t.last).slice(0,40)}</small></td></tr>`).join('')+'</table>'):'<div class="empty" style="padding:12px">Обращений нет</div>';
+  $('supList').querySelectorAll('[data-u]').forEach(r=>r.onclick=()=>openSupThread(r.dataset.u))
+}catch(e){}}
+async function openSupThread(u){supSel=u;$('supThread').style.display='block';$('supUser').textContent=u;
+  const d=await api('support/thread?user='+encodeURIComponent(u));renderSupLog(d.thread)}
+function renderSupLog(t){$('supLog').innerHTML=(t.messages||[]).map(m=>`<div class="msg ${m.from}">${esc(m.text)}${m.credit?` <b>(+${F(m.credit)})</b>`:''}<small>${m.by}</small></div>`).join('')||'<div class="empty">Пока пусто</div>';$('supLog').scrollTop=$('supLog').scrollHeight}
+$('supSend').onclick=async()=>{if(!supSel)return;const text=$('supMsg').value.trim(),credit=num($('supCredit').value);if(!text&&!credit)return;
+  try{const d=await api('support/reply',{user:supSel,text,credit}); renderSupLog(d.thread);$('supMsg').value='';$('supCredit').value='';loadSupList()}catch(e){toast(e.message)}};
+$('supClose').onclick=async()=>{if(!supSel)return;try{await api('support/close',{user:supSel});toast('Обращение закрыто');$('supThread').style.display='none';loadSupList()}catch(e){}};
+
+$('fab').onclick=async()=>{if(!me)return openAuth();$('chatTitle').textContent='Поддержка';const d=await api('support/mine');renderChat(d.thread);$('chat').classList.add('on')};
+function renderChat(t){$('chatLog').innerHTML=(t.messages||[]).map(m=>`<div class="msg ${m.from}">${esc(m.text)}${m.credit?` <b>(+${F(m.credit)})</b>`:''}</div>`).join('')||'<div class="empty">Напишите нам, если что-то пошло не так</div>';$('chatLog').scrollTop=$('chatLog').scrollHeight}
+$('chatX').onclick=()=>$('chat').classList.remove('on');
+$('chatSend').onclick=async()=>{const text=$('chatMsg').value.trim();if(!text)return;try{const d=await api('support/send',{text});renderChat(d.thread);$('chatMsg').value='';if(me){const mm=await api('me');me.bal=mm.user.bal;render()}}catch(e){toast(e.message)}};
+
+$('go').onclick=async()=>{if(!me||busy||!target||(selIds.size===0&&cash<=0))return;
+  busy=true;$('res').textContent='';const ids=[...selIds],total=selTotal()+cash,tg=target,cashNow=cash;render();
+  try{const d=await api('upgrade',{ids,cash:cashNow,target:tg.price,name:tg.name,ic:tg.ic,img:tg.img});
+    const dur=fast?900:3100,turns=fast?2:5;$('needle').style.transition=`transform ${dur}ms cubic-bezier(.12,.7,.1,1)`;
+    rot=Math.ceil(rot/360)*360+turns*360+180+d.angle;$('needle').style.transform=`rotate(${rot}deg)`;
     if(!fast){let tk=0;const iv=setInterval(()=>{tk++;sTick();if(tk>=Math.floor(dur/220))clearInterval(iv)},220)}
-    setTimeout(()=>{me.bal=d.bal;inv=d.inv;selIds.clear();st.n++;d.win?st.w++:st.l++;st.pr+=(d.win?d.target-d.total:-d.total);busy=false;
-      d.win?sWin():sLose();renderInv();render();
-      const rs=$('res');rs.textContent=d.win?'Победа! Получен «'+tg.name+'» +'+F(d.target-d.total)+' $':'Проигрыш − '+F(d.total)+' $';rs.className=d.win?'g':'rd';loadFeed()},dur)
-  }catch(e){busy=false;$('res').textContent=e.message;render();if(/войти/i.test(e.message)){me=null;render();$('auth').classList.add('on')}}};
+    setTimeout(()=>{me.bal=d.bal;inv=d.inv;selIds.clear();cash=0;st.n++;d.win?st.w++:st.l++;st.pr+=(d.win?d.target-d.total:-d.total);busy=false;
+      d.win?sWin():sLose();renderInvGrid();renderChosen();render();
+      const rs=$('res');rs.textContent=d.win?'Победа! Получен «'+tg.name+'» +'+F(d.target-d.total):'Проигрыш − '+F(d.total);rs.className=d.win?'g':'rd';loadFeed()},dur)
+  }catch(e){busy=false;$('res').textContent=e.message;render();if(/войти/i.test(e.message)){me=null;render();openAuth()}}};
 
 let adR=5000,adS=15,adT=null,vidOk=true;
-$('topB').onclick=()=>{if(!me)return $('auth').classList.add('on');const b=$('adGo');b.disabled=false;b.dataset.s='0';b.textContent='Смотреть рекламу';$('adMsg').textContent='';$('adr').textContent=F(adR);$('adv').classList.add('on')};
+$('topB').onclick=()=>{if(!me)return openAuth();const b=$('adGo');b.disabled=false;b.dataset.s='0';b.textContent='Смотреть рекламу';$('adMsg').textContent='';$('adr').textContent=F(adR);$('adv').classList.add('on')};
 $('advid').onerror=()=>{vidOk=false;$('advid').style.display='none';$('adph').style.display='block'};
 $('adX').onclick=()=>{clearInterval(adT);$('advid').pause();$('adv').classList.remove('on')};
 $('adGo').onclick=async()=>{const b=$('adGo');
-  if(b.dataset.s==='1'){try{const d=await api('ad/claim',{});me.bal=d.bal;render();sWin();$('adMsg').textContent='Начислено +'+F(d.reward)+' $';b.dataset.s='0';b.textContent='Смотреть ещё'}catch(e){$('adMsg').textContent=e.message}return}
+  if(b.dataset.s==='1'){try{const d=await api('ad/claim',{});me.bal=d.bal;render();sWin();toast('+'+F(d.reward)+' коинов');$('adMsg').textContent='Начислено +'+F(d.reward);b.dataset.s='0';b.textContent='Смотреть ещё'}catch(e){$('adMsg').textContent=e.message}return}
   try{const d=await api('ad/start',{});b.disabled=true;let t=d.seconds;b.textContent='Осталось '+t+' с';$('adMsg').textContent='';clearInterval(adT);const v=$('advid');if(vidOk){v.currentTime=0;v.play().catch(()=>{})}
     adT=setInterval(()=>{if(vidOk&&v.paused)return;t--;if(t>0)b.textContent='Осталось '+t+' с';else{clearInterval(adT);b.disabled=false;b.dataset.s='1';b.textContent='Забрать награду'}},1000)}catch(e){$('adMsg').textContent=e.message}};
 
-renderShop();renderTarget();renderInv();render();
-(async()=>{try{const c=await api('config');rtp=c.rtp;adR=c.adReward;adS=c.adSeconds;if(/^https?:\/\//.test(c.tt||'')){$('ttl').href=c.tt;$('ttl').style.display='inline-block'}}catch(e){}
-  if(tok){try{await refreshMe()}catch(e){tok=''}}render();if(!me)$('auth').classList.add('on');loadFeed();setInterval(loadFeed,4000)})();
+renderInvGrid();renderChosen();renderTgPrev();render();
+(async()=>{try{const c=await api('config');rtp=c.rtp||95;adR=c.adReward;adS=c.adSeconds;gClientId=c.googleClientId||'';
+    if(/^https?:\/\//.test(c.tt||'')){$('ttl').href=c.tt;$('ttl').style.display='inline-block'}
+    if(gClientId&&window.google){google.accounts.id.initialize({client_id:gClientId,callback:window.onGoogleCredential})}}catch(e){}
+  const qs=new URLSearchParams(location.search);
+  if(qs.get('steam')){try{const d=await api('steam/consume',{code:qs.get('steam')});await afterLogin(d)}catch(e){toast('Не удалось войти через Steam')}history.replaceState({},'',location.pathname)}
+  if(qs.get('steamerr')){toast('Не удалось войти через Steam');history.replaceState({},'',location.pathname)}
+  if(tok){try{await refreshMe()}catch(e){tok=''}}
+  await loadCatalog();render();if(!me)openAuth();loadFeed();setInterval(loadFeed,4000)})();
 </script>
 </body>
 </html>
