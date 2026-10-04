@@ -29,6 +29,7 @@ nav{position:sticky;top:0;z-index:20;background:rgba(252,251,248,.92);backdrop-f
 .btn{border:1px solid var(--ink);border-radius:3px;padding:8px 14px;background:var(--card);color:var(--ink);font-weight:600;font-size:13px}
 .btn.d{background:var(--ink);color:var(--bg)}
 .btn.o{background:none;border-color:var(--line);color:var(--mut)}
+.btn.o.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .avwrap{position:relative}
 .av{width:30px;height:30px;border-radius:3px;object-fit:cover;border:1px solid var(--ink);cursor:pointer;display:block}
 .avph{width:30px;height:30px;border-radius:3px;border:1px solid var(--ink);cursor:pointer;display:grid;place-items:center;font-weight:700;background:var(--ink);color:var(--bg);font-size:13px}
@@ -151,6 +152,11 @@ tr[data-e]{cursor:pointer}tr[data-e]:hover td{background:#f3f1e9}tr.sel td{backg
 </div></nav>
 <div class="wrap">
   <div class="hero"><h1>Level Up<br>Your Luck</h1><p>Апгрейд игровых предметов · by Litrerelly · только игровые коины</p></div>
+  <div class="rowc" style="gap:8px;margin-bottom:14px">
+    <button class="btn o" id="icI" style="padding:7px 12px">ⓘ Правила</button>
+    <button class="btn o" id="icF" style="padding:7px 12px">⚡ Быстрая анимация</button>
+    <button class="btn o" id="icS" style="padding:7px 12px">🔊 Звук</button>
+  </div>
   <div id="topDropBox"></div>
   <div class="strip" id="feed"></div>
 
