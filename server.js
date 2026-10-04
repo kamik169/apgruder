@@ -5,6 +5,7 @@ const ADMIN=(process.env.ADMIN_NICK||'litrerelly').toLowerCase();
 const GOOGLE_CLIENT_ID=process.env.GOOGLE_CLIENT_ID||'',STEAM_API_KEY=process.env.STEAM_API_KEY||'';
 const AD_SECONDS=+process.env.AD_SECONDS||15,AD_COOLDOWN=(+process.env.AD_COOLDOWN||60)*1000,AD_REWARD=+process.env.AD_REWARD||5000;
 const MAXITEM=500000,HELPER_CAP=+process.env.HELPER_CAP||5000;
+const CLICK_MIN_MS=+process.env.CLICK_MIN_MS||280,CLICK_DAILY_CAP=+process.env.CLICK_DAILY_CAP||500;
 const ROLES=['user','creator','helper','admin','senior'];
 const rank=r=>Math.max(0,ROLES.indexOf(r));
 
@@ -62,6 +63,14 @@ R['GET /api/config']=()=>({rtp:db.rtp,adReward:AD_REWARD,adSeconds:AD_SECONDS,tt
 R['GET /api/feed']=()=>({feed:db.feed});
 R['GET /api/me']=(b,u)=>({user:pub(need(u))});
 R['GET /api/catalog']=()=>({catalog:db.catalog});
+R['POST /api/avatar']=(b,u)=>{const n=need(u),url=String(b.url||'').trim();
+  if(url&&(!/^https?:\/\//.test(url)||url.length>300))err('Укажите прямую ссылку на картинку (http/https)');
+  db.users[n].avatar=url||null;save();return{avatar:db.users[n].avatar}};
+R['POST /api/click']=(b,u)=>{const x=db.users[need(u)],now=Date.now(),day=new Date(now).toISOString().slice(0,10);
+  if(x.clickDay!==day){x.clickDay=day;x.clickCount=0}
+  if(x.clickAt&&now-x.clickAt<CLICK_MIN_MS)err('Слишком быстро, подождите чуть-чуть');
+  if(x.clickCount>=CLICK_DAILY_CAP)err('Дневной лимит кликов исчерпан ('+CLICK_DAILY_CAP+'), приходите завтра');
+  x.clickAt=now;x.clickCount++;x.bal+=1;save();return{bal:x.bal,count:x.clickCount,cap:CLICK_DAILY_CAP}};
 
 R['POST /api/register']=(b,u,ip)=>{limit(ip);const e=String(b.email||'').trim().toLowerCase();
   if(!/^\S+@\S+\.\S+$/.test(e)||e.length>80)err('Введите корректную почту');
